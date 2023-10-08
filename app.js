@@ -18,6 +18,9 @@ app.use(express.json());
 app.get('/', function (req, res) {
     res.render('pages/index');
 })
+app.get('/punch', function (req, res) {
+    res.render('pages/punch');
+})
 
 //start server
 const PORT = process.env.PORT || 3000;
