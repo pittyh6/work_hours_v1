@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 
 /*---------------ROOT---------------*/
-app.set('view', './views');
+app.set('views', './views');
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -16,7 +16,7 @@ app.use(express.json());
 
 //Define routes -> redirect to home page when open website
 app.get('/', function (req, res) {
-    res,render('index');
+    res.render('pages/index');
 })
 
 //start server
