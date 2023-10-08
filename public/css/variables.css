@@ -8,24 +8,24 @@ https://colorhunt.co/palette/c2dedcece5c7cdc2ae116a7b
 :root{
     /* Colours */
     /* pink */
-    --pink: #F2BED1;
+    --pink: #F2BED1;/*buttons*/
     --pink-medium: #FDCEDF;
     --pink-light: #F8E8EE;
-    --pink-light-ex: #F9F5F6;
+    --pink-light-ex: #F9F5F6; /*Text*/
     /* green */
     --emerald: #116A7B;
     --green: #C2DEDC;
     --green-pastel: #C4DFDF;
     --green-medium: #D2E9E9;
-    --green-light: #E3F4F4;
+    --green-light: #E3F4F4; /*text button*/
     /* beige */
     --beige-light: #EEE2DE;
     --beige-light-ex: #F8F6F4;
     --beige-yellow: #ECE5C7;
     /* others */
     --brown-light: #CDC2AE;
-    --orange: #EA906C;
-    --red-dark: #B31312;
-    --blue-dark: #2B2A4C;
+    --orange: #EA906C; /*menu*/
+    --red-dark: #B31312; /*logo*/
+    --blue-dark: #2B2A4C; /*bg page*/
    
 }

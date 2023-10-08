@@ -5,7 +5,7 @@
 :root{
     --font-headers-logo: 'Playfair Display';
     --font-text: 'Bacasime Antique';
-    --font-weight-headers: 700;
     --font-weight-logo: 900;
+    --font-weight-headers: 700;
     --font-weight-text: 400;
 }
