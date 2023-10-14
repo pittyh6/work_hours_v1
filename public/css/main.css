@@ -11,7 +11,6 @@ body {
 }
 .container {
   background-color: var(--blue-dark);
-  width: 80%;
   margin: 0 auto;
 }
 
