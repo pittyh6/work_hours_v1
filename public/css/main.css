@@ -17,18 +17,20 @@ body {
 /* ------------- Header ------------- */
 .navbar {
   background-color: var(--orange);
+  font-family: var(--font-headers-logo);
+  font-size: 20px;
 }
 .logo {
   color: var(--red-dark);
-  font-family: var(--font-headers-logo);
   font-weight: var(--font-weight-logo);
-  font-size: 20px;
+  padding: 10px;
 }
 ul,
 li,
 a {
   text-decoration: none;
   list-style: none;
-  display: inline
+  color: var(--green-pastel);
+  text-align: center;
 }
 
