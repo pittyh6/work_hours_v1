@@ -39,10 +39,14 @@ body {
 ul,
 li,
 a {
-  text-decoration: none;
-  list-style: none;
   color: var(--green-pastel);
+  list-style: none;
+  text-decoration: none;
   text-align: center;
+  padding: 10px 0;
+}
+a:hover{
+  color: var(--emerald);
 }
 .nav_btn{
     width: 30px;
