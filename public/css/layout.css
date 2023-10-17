@@ -28,5 +28,6 @@
   a {
     display: inline;
     padding: 0px 10px;
+    position: static;
   }
 }

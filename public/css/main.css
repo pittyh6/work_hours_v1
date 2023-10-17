@@ -30,6 +30,7 @@ body {
   background-color: var(--orange);
   font-family: var(--font-headers-logo);
   font-size: 20px;
+  position: relative;
 }
 .logo {
   color: var(--red-dark);
@@ -44,6 +45,7 @@ a {
   text-decoration: none;
   text-align: center;
   padding: 10px 0;
+  position: absolute;
 }
 a:hover{
   color: var(--emerald);
