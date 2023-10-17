@@ -14,6 +14,9 @@
 
 /*Tablet  601×962 through 1280×800 */
 @media only screen and (min-width: 601px) {
+  .nav-items {
+   
+  }
 }
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -23,10 +26,12 @@
   .container {
     width: 80%;
   }
-  .nav-items{
+  .nav-items {
     grid-row-start: 1;
     grid-column-start: 2;
     grid-column-end: 3;
+    justify-self: center;
+    align-self: center;
   }
   ul,
   li,
