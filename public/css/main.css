@@ -62,6 +62,5 @@ a:hover {
 }
 .nav_btn {
   width: 30px;
-  grid-column-start: 1;
-  grid-column-end: 2;
+  grid-column-start: 2;
 }
