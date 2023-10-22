@@ -48,8 +48,17 @@
   /* ------------- MAIN ------------- */
   .main {
     height: 100vh;
+    padding-top: 120px;
   }
   .img-icon-sm {
-    width: 85px;
+    width: 110px;
+  }
+  .bnt-clock {
+    height: 50px;
+    width: 200px;
+    margin-left: 25px;
+  }
+  .punch-img {
+    margin: 40px 0;
   }
 }
