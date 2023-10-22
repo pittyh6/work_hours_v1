@@ -14,6 +14,7 @@ https://colorhunt.co/palette/c2dedcece5c7cdc2ae116a7b
     --pink-light-ex: #F9F5F6; /*Text*/
     /* green */
     --emerald: #116A7B; /*Hover*/
+    --emerald-transp: #11697b9c; /*menu */
     --green: #C2DEDC;
     --green-pastel: #C4DFDF; /*menu links text*/
     --green-medium: #D2E9E9;
@@ -27,5 +28,5 @@ https://colorhunt.co/palette/c2dedcece5c7cdc2ae116a7b
     --orange: #EA906C; /*menu*/
     --red-dark: #B31312; /*logo*/
     --blue-dark: #2B2A4C; /*bg page*/
-   
+    --transparent-color: #ffffff00;
 }

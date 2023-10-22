@@ -26,19 +26,23 @@ body {
 .navbar {
   display: flex;
   justify-content: space-between;
-  align-items: center; 
+  align-items: center;
   background-color: var(--orange);
   font-family: var(--font-headers-logo);
   font-size: 20px;
   position: relative;
+  height: 50px;
 }
 .logo {
   color: var(--red-dark);
   font-weight: var(--font-weight-logo);
   padding: 10px;
 }
-.nav-items{
- 
+.nav-items {
+  background-color: var(--emerald-transp);
+  position: absolute;
+  margin-top: 209px;
+  width: 100%;
 }
 ul,
 li,
@@ -48,7 +52,6 @@ a {
   text-decoration: none;
   text-align: center;
   padding: 10px 0;
-  position: absolute;
 }
 
 a:hover {
