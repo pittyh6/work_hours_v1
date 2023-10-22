@@ -55,8 +55,13 @@ a {
 }
 
 a:hover {
-  color: var(--emerald);
+  color: var(--orange);
 }
 .nav_btn {
   width: 30px;
+}
+
+/* ------------- MAIN ------------- */
+.main{
+  height: 100vh;
 }

@@ -39,4 +39,8 @@
     padding: 0px 10px;
     position: static;
   }
+  a:hover {
+    color: var(--emerald);
+    font-weight: bold;
+  }
 }
