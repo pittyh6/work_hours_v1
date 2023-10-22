@@ -62,9 +62,22 @@ a:hover {
 }
 
 /* ------------- MAIN ------------- */
-.main{
+.main {
   height: 100vh;
+  margin: 0 auto;
 }
-.img-icon-sm{
+.img-icon-sm {
   width: 60px;
+}
+.punch-img {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+.bnt-clock {
+  background-color: var(--beige-light);
+  border: none;
+  height: 30px;
+  width: 100px;
+  margin-left: 15px;
 }
