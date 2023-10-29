@@ -3,7 +3,12 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+/*-------------------------------------*/
 
+/* -------------Mongo DB------------*/
+const mongoose = require('mongoose');
+mongoose.connect("mongodb://localhost:27017/workJamy", {useNewUrlParser: true, useUnifiedTopology: true});
+/*-------------------------------------*/
 
 /*---------------ROOT---------------*/
 app.set('views', './views');
