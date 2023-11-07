@@ -9,6 +9,11 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost:27017/workJamy", {useNewUrlParser: true, useUnifiedTopology: true});
 import Work from './model/Work'
+
+const work_day = new Work({
+    name_user: 'Priscila',
+    work: []
+})
 /*-------------------------------------*/
 
 /*---------------ROOT---------------*/
