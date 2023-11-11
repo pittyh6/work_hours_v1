@@ -14,7 +14,8 @@ mongoose.connect("mongodb://localhost:27017/workJamy", {useNewUrlParser: true, u
 //const Work = require('./model/Work');
 import Work from './model/Work.js'
 
-const work_day = new Work({
+//create new work_day
+const workDay = new Work({
     name_user: 'Priscila',
     day: '10-11-2023',
     punch_in: '9:00',
@@ -22,6 +23,7 @@ const work_day = new Work({
     break_in: '12:00',
     break_out: '12:30',
 })
+//await workDay.save()
 /*-------------------------------------*/
 
 /*---------------ROOT---------------*/
