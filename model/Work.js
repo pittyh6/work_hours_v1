@@ -4,6 +4,7 @@ const { Schema, model } = mongoose;
 
 //create schema for workdb
 const workSchema = new Schema({
+    _id: Number,
     name_user: String,
     day: Date,
     punch_in: String,

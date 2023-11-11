@@ -16,10 +16,11 @@ import Work from './model/Work.js'
 
 //create new work_day
 const workDay = new Work({
-    name_user: 'Priscila',
-    day: '10-11-2023',
-    punch_in: '9:00',
-    punch_out: '17:00',
+    _id: 100002,
+    name_user: 'Carlos',
+    day: '11-11-2023',
+    punch_in: '09:00',
+    punch_out: '18:00',
     break_in: '12:00',
     break_out: '12:30',
 })
