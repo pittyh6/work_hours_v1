@@ -72,6 +72,12 @@ a:hover {
   text-align: center;
   justify-content: center;
 }
+.user_info_top{
+  display: flex; 
+}
+.user_info_top > h2{
+  padding: 0 15px;
+}
 .img-icon-sm {
   width: 60px;
 }
