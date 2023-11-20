@@ -74,8 +74,9 @@ a:hover {
 }
 .user_info_top{
   display: flex;
-  background-color:var(--blue-dark) ; 
+  flex-direction: column;
   color: var(--emerald);
+  font-size: 0.75rem;
 }
 .user_info_top > h2{
   padding: 0 15px;
