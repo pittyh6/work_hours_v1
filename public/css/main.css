@@ -73,7 +73,9 @@ a:hover {
   justify-content: center;
 }
 .user_info_top{
-  display: flex; 
+  display: flex;
+  background-color:var(--blue-dark) ; 
+  color: var(--emerald);
 }
 .user_info_top > h2{
   padding: 0 15px;
