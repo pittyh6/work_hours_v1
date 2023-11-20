@@ -14,9 +14,12 @@
 
 /*Tablet  601×962 through 1280×800 */
 @media only screen and (min-width: 601px) {
-   /* ------------- MAIN ------------- */
-  .img-icon-sm{
+  /* ------------- MAIN ------------- */
+  .img-icon-sm {
     width: 70px;
+  }
+  .logo{
+    margin-right: -65%;
   }
 }
 
@@ -44,6 +47,9 @@
   a:hover {
     color: var(--emerald);
     font-weight: bold;
+  }
+  .logo{
+    margin-right: -45%;
   }
   /* ------------- MAIN ------------- */
   .main {

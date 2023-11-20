@@ -37,6 +37,7 @@ body {
   color: var(--red-dark);
   font-weight: var(--font-weight-logo);
   padding: 10px;
+  margin-right: -25%;
 }
 .nav-items {
   background-color: var(--emerald);
@@ -75,6 +76,7 @@ a:hover {
 .user_info_top{
   display: flex;
   flex-direction: column;
+  align-content: flex-start;
   color: var(--emerald);
   font-size: 0.75rem;
 }
