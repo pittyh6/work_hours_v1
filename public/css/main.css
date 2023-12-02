@@ -18,7 +18,12 @@ hr{
   border: 1px solid var(--green-pastel);
   margin: 20px 0;
 }
-
+h1{
+  margin-bottom: 40px;
+}
+p{
+  margin: 5px 0;
+}
 /*HIDE and show*/
 .hide {
   display: none;

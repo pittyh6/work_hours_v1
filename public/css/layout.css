@@ -66,4 +66,7 @@
   .punch-img {
     margin: 30px 0;
   }
+  .clock_hours>p{
+    margin-left:80px;
+  }
 }
