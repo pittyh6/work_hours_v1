@@ -14,6 +14,11 @@ body {
   margin: 0 auto;
 }
 
+hr{
+  border: 1px solid var(--green-pastel);
+  margin: 20px 0;
+}
+
 /*HIDE and show*/
 .hide {
   display: none;
