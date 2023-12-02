@@ -69,9 +69,10 @@ a:hover {
 
 /* ------------- MAIN ------------- */
 .main {
-  height: 100vh;
+  /* height: 100vh; */
   margin: 0 auto;
   padding-top: 40px;
+  padding-bottom: 40px;
   text-align: center;
 }
 .main > div{
@@ -102,4 +103,17 @@ a:hover {
   height: 30px;
   width: 100px;
   margin-left: 15px;
+}
+
+/* Hours clocked result */
+.hours{
+  display: flex;
+  flex-wrap: wrap;
+}
+.clock_hours{
+  width: 100%;
+  text-align: left;
+}
+.clock_hours>p{
+  margin-left: 30px;
 }
