@@ -2,6 +2,8 @@ const btn_clock_in = document.querySelector('#clock-in')
 const btn_clock_out = document.querySelector('#clock-out')
 const btn_break_start = document.querySelector('#break-start')
 const btn_break_end = document.querySelector('#break-end')
+const name_user = document.querySelector('#name-user')
+const id_user = document.querySelector('#id-user')
 
 function punchTime(event) {
     var today = new Date();
