@@ -15,6 +15,8 @@ function punchTime(event) {
 
 btn_clock_in.addEventListener('click', function (e) {
     punchTime(e.target.id)
+    const currentDay = new Date()
+    alert(currentDay)
 })
 btn_clock_out.addEventListener('click', function (e) {
     punchTime(e.target.id)
