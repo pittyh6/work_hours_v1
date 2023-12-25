@@ -7,6 +7,7 @@ const workSchema = new Schema({
     _id: Number,
     name_user: String,
     day: Date,
+    weekDay: String,
     punch_in: String,
     punch_out: String,
     break_in: String,
