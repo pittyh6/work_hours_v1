@@ -16,7 +16,7 @@ function punchTime(event) {
 btn_clock_in.addEventListener('click', function (e) {
     punchTime(e.target.id)
     const currentDay = new Date()
-    alert(currentDay)
+    console.log("Tue + Dec + 26 + 2023 + 12:19:08 + GMT+1100 + (Australian Eastern Daylight Time)== " + currentDay)
 })
 btn_clock_out.addEventListener('click', function (e) {
     punchTime(e.target.id)
