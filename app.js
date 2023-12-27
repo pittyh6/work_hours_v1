@@ -10,7 +10,12 @@ import bodyParser from 'body-parser';
 /* -------------Mongo DB------------*/
 //const mongoose = require('mongoose');
 import mongoose from 'mongoose';
-mongoose.connect("mongodb://localhost:27017/workJamy", {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb://localhost:27017/workJamy", {useNewUrlParser: true, useUnifiedTopology: true})
+.then(()=>{
+    console.log('Connected to MongoDB.')
+}).catch(error => {
+    console.log('Error connecting to MongoDB: ', error);
+})
 //const Work = require('./model/Work');
 import Work from './model/Work.js'
 
