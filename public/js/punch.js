@@ -23,6 +23,7 @@ btn_clock_in.addEventListener('click', function (e) {
     console.log("time: " + time)
     console.log("weekDay: " + weekDay)
     console.log("name_user_value: " + name_user_value)
+    console.log("id_user_value: " + id_user_value)
    
     try {
         const newPunchIn = new Work({
