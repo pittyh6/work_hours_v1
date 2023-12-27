@@ -5,6 +5,7 @@ import express from 'express';
 const app = express();
 //const bodyParser = require('body-parser');
 import bodyParser from 'body-parser';
+
 /*-------------------------------------*/
 
 /* -------------Mongo DB------------*/
@@ -18,6 +19,7 @@ mongoose.connect("mongodb://localhost:27017/workJamy", {useNewUrlParser: true, u
 })
 //const Work = require('./model/Work');
 import Work from './model/Work.js'
+//import './public/js/punch.js'
 
 //create new work_day
 const workDay = new Work({

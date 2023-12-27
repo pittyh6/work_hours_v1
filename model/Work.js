@@ -17,3 +17,4 @@ const workSchema = new Schema({
 //create model
 const Work = model('Work', workSchema);
 export default Work;
+/*module.exports = {Work}*/

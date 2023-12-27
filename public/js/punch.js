@@ -1,4 +1,5 @@
-//import Work from '../../model/Work'
+//import Work from '../../model/Work.js'
+//const Work = require('../../model/Work.js')
 
 const btn_clock_in = document.querySelector('#clock-in')
 const btn_clock_out = document.querySelector('#clock-out')
@@ -26,6 +27,7 @@ btn_clock_in.addEventListener('click', function (e) {
     console.log("id_user_value: " + id_user_value)
    
     try {
+        import Work from './../../model/Work'
         const newPunchIn = new Work({
             _id: id_user_value,
             name_user: name_user_value,
