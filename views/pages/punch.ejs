@@ -17,22 +17,24 @@
             <h2 class="name_user" id="name_user">Priscila</h2>
             <h2 class="id_user" id="id_user">100001</h2>
         </div> -->
-        <div class="clock-in punch-img">
-            <img src="../img/clock.svg" alt="clock-in-image" class="img-icon-sm">
-            <button class="bnt-clock" id="clock-in">Clock-In</button>
-        </div>
-        <div class="breack-start punch-img">
-            <img src="../img/break.svg" alt="break-start-image" class="img-icon-sm">
-            <button class="bnt-clock" id="break-start">break-start</button>
-        </div>
-        <div class="breack-end punch-img">
-            <img src="../img/break.svg" alt="break-end-image" class="img-icon-sm">
-            <button class="bnt-clock" id="break-end">break-end</button>
-        </div>
-        <div class="clock-out punch-img">
-            <img src="../img/clock.svg" alt="clock-out-image" class="img-icon-sm">
-            <button class="bnt-clock" id="clock-out">clock-out</button>
-        </div>
+        <form action="/add" method="post">
+            <div class="clock-in punch-img">
+                <img src="../img/clock.svg" alt="clock-in-image" class="img-icon-sm">
+                <button class="bnt-clock" id="clock-in" value="<%= %>">Clock-In</button>
+            </div>
+            <div class="breack-start punch-img">
+                <img src="../img/break.svg" alt="break-start-image" class="img-icon-sm">
+                <button class="bnt-clock" id="break-start">break-start</button>
+            </div>
+            <div class="breack-end punch-img">
+                <img src="../img/break.svg" alt="break-end-image" class="img-icon-sm">
+                <button class="bnt-clock" id="break-end">break-end</button>
+            </div>
+            <div class="clock-out punch-img">
+                <img src="../img/clock.svg" alt="clock-out-image" class="img-icon-sm">
+                <button class="bnt-clock" id="clock-out">clock-out</button>
+            </div>
+        </form>
     </main>
 
 
