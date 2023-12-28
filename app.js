@@ -52,6 +52,10 @@ app.get('/punch', function (req, res) {
     res.render('pages/punch');
 })
 
+app.get("/add", function(req, res) {
+    
+})
+
 //start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
