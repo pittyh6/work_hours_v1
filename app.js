@@ -53,7 +53,7 @@ app.get('/punch', function (req, res) {
 })
 
 app.get("/add", function(req, res) {
-    
+    const clockin = req.body.
 })
 
 //start server
