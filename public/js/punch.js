@@ -12,12 +12,12 @@ const id_user_value = document.querySelector('#id_user').innerHTML
 const currentDay = new Date()
 var date = currentDay.getFullYear() + '-' + (currentDay.getMonth() + 1) + '-' + currentDay.getDate();
 var time = currentDay.getHours() + ":" + currentDay.getMinutes();
-var dayOfWeek = ["Sunday","Monday","Tuesday", "Wednesday","Thursday","Friday","Saturday"]
+var dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 var weekDay = dayOfWeek[currentDay.getDay()]
 
 
 btn_clock_in.addEventListener('click', function (e) {
-   // punchTime(e.target.id)
+    // punchTime(e.target.id)
     //const currentDay = new Date()
     console.log("Tue + Dec + 26 + 2023 + 12:19:08 + GMT+1100 + (Australian Eastern Daylight Time)== " + currentDay)
     console.log("date: " + date)
@@ -25,7 +25,7 @@ btn_clock_in.addEventListener('click', function (e) {
     console.log("weekDay: " + weekDay)
     console.log("name_user_value: " + name_user_value)
     console.log("id_user_value: " + id_user_value)
-   
+
     try {
         const newPunchIn = new Work({
             _id: id_user_value,
@@ -42,10 +42,12 @@ btn_clock_in.addEventListener('click', function (e) {
         }).catch(saveError => {
             console.error('Error saving punch in:', saveError);
         });
-    }catch(error){
+    } catch (error) {
         console.log("Error saving new punchIn: ", error)
     }
 })
+
+
 
 btn_clock_out.addEventListener('click', function (e) {
     punchTime(e.target.id)

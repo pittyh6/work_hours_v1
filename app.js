@@ -52,12 +52,14 @@ app.get('/punch', function (req, res) {
     res.render('pages/punch');
 })
 
-app.get("/add", function(req, res) {
+//add clock-in
+app.get("/", function(req, res) {
     const clockin = req.body.clockIn
     const clockout = req.body.clockOut
     const breakstart = req.body.breakStart
     const breakend = req.body.breakEnd
-    
+   
+    res.render('pages/punch')
 })
 
 //start server
