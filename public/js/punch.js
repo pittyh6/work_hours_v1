@@ -17,38 +17,45 @@ var dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday
 var weekDay = dayOfWeek[currentDay.getDay()]
 
 
-
+import {punch} from '../js/script.js'
 //punch_in
-btns_punch[0].addEventListener('click', function (e) {
+btns_punch[0].addEventListener('click', async function () {
     // punchTime(e.target.id)
     //const currentDay = new Date()
+
     console.log("Tue + Dec + 26 + 2023 + 12:19:08 + GMT+1100 + (Australian Eastern Daylight Time)== " + currentDay)
     console.log("date: " + date)
     console.log("time: " + time)
     console.log("weekDay: " + weekDay)
     console.log("name_user_value: " + name_user_value)
     console.log("id_user_value: " + id_user_value)
-    console.log("btns_punch: "+ btns_punch[0].innerHTML)
+    console.log("btns_punch: " + btns_punch[0].innerHTML)
 
-    try {
-        const newPunchIn = new Work({
-            _id: id_user_value,
-            name_user: name_user_value,
-            day: date,
-            week_day: weekDay,
-            punch_in: time,
-            punch_out: '18:50',
-            break_in: '12:00',
-            break_out: '12:30',
-        })
-        newPunchIn.save().then(savePunchIn => {
-            console.log('Punch in saved:', savedPunchIn);
-        }).catch(saveError => {
-            console.error('Error saving punch in:', saveError);
-        });
-    } catch (error) {
-        console.log("Error saving new punchIn: ", error)
+    try{
+       await punch(id_user_value,name_user_value,date,weekDay,time)
+    }catch(error){
+        console.log("Error in button clock_in: " + error)
     }
+    /*
+        try {
+            const newPunchIn = new Work({
+                _id: id_user_value,
+                name_user: name_user_value,
+                day: date,
+                week_day: weekDay,
+                punch_in: time,
+                punch_out: '18:50',
+                break_in: '12:00',
+                break_out: '12:30',
+            })
+            newPunchIn.save().then(savePunchIn => {
+                console.log('Punch in saved:', savedPunchIn);
+            }).catch(saveError => {
+                console.error('Error saving punch in:', saveError);
+            });
+        } catch (error) {
+            console.log("Error saving new punchIn: ", error)
+        }*/
 })
 
 
