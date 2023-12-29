@@ -53,13 +53,14 @@ app.get('/punch', function (req, res) {
 })
 
 //add clock-in
-app.get("/", function(req, res) {
+//import {punch} from './public/js/punch.js'
+app.post("/punch", function(req, res) {
     const clockin = req.body.clockIn
     const clockout = req.body.clockOut
     const breakstart = req.body.breakStart
     const breakend = req.body.breakEnd
-   
-    res.render('pages/punch')
+    //punch()
+   // res.render('pages/')
 })
 
 //start server

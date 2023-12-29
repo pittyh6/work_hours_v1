@@ -1,13 +1,14 @@
 //import Work from '../../model/Work.js'
 //const Work = require('../../model/Work.js')
 
-const btn_clock_in = document.querySelector('#clock-in')
+const btn_clock_in = document.querySelectorAll('#clock-in')
 const btn_clock_out = document.querySelector('#clock-out')
 const btn_break_start = document.querySelector('#break-start')
 const btn_break_end = document.querySelector('#break-end')
 const name_user_value = document.querySelector('#name_user').innerHTML
 const id_user = document.querySelector('#id_user')
 const id_user_value = document.querySelector('#id_user').innerHTML
+const btns_punch = document.querySelectorAll('.bnt-clock')
 
 const currentDay = new Date()
 var date = currentDay.getFullYear() + '-' + (currentDay.getMonth() + 1) + '-' + currentDay.getDate();
@@ -16,7 +17,9 @@ var dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday
 var weekDay = dayOfWeek[currentDay.getDay()]
 
 
-btn_clock_in.addEventListener('click', function (e) {
+
+//punch_in
+btns_punch[0].addEventListener('click', function (e) {
     // punchTime(e.target.id)
     //const currentDay = new Date()
     console.log("Tue + Dec + 26 + 2023 + 12:19:08 + GMT+1100 + (Australian Eastern Daylight Time)== " + currentDay)
@@ -25,6 +28,7 @@ btn_clock_in.addEventListener('click', function (e) {
     console.log("weekDay: " + weekDay)
     console.log("name_user_value: " + name_user_value)
     console.log("id_user_value: " + id_user_value)
+    console.log("btns_punch: "+ btns_punch[0].innerHTML)
 
     try {
         const newPunchIn = new Work({
@@ -49,6 +53,8 @@ btn_clock_in.addEventListener('click', function (e) {
 
 
 
+
+/*
 btn_clock_out.addEventListener('click', function (e) {
     punchTime(e.target.id)
 })
@@ -58,3 +64,4 @@ btn_break_start.addEventListener('click', function (e) {
 btn_break_end.addEventListener('click', function (e) {
     punchTime(e.target.id)
 })
+*/
