@@ -18,6 +18,7 @@ var weekDay = dayOfWeek[currentDay.getDay()]
 
 
 import {punch} from '../js/script.js'
+//import {punch} from './../../model/Work.js'
 //punch_in
 btns_punch[0].addEventListener('click', async function () {
     // punchTime(e.target.id)
@@ -31,11 +32,30 @@ btns_punch[0].addEventListener('click', async function () {
     console.log("id_user_value: " + id_user_value)
     console.log("btns_punch: " + btns_punch[0].innerHTML)
 
-    try{
+
+try{
+    const response = await fetch('/punch', {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    })
+    const data = await response.json()
+    if(data.success) {
+        alert('Punch saved successfully!')
+    }else{
+        alert("Error saving punch!")
+    }
+}catch(error){
+    console.error("Error punch: " + error)
+}
+
+
+    /*try{
        await punch(id_user_value,name_user_value,date,weekDay,time)
     }catch(error){
         console.log("Error in button clock_in: " + error)
-    }
+    }*/
     /*
         try {
             const newPunchIn = new Work({
