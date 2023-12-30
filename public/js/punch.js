@@ -17,7 +17,7 @@ var dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday
 var weekDay = dayOfWeek[currentDay.getDay()]
 
 
-import {punch} from '../js/script.js'
+//import {punch} from '../js/script.js'
 //import {punch} from './../../model/Work.js'
 //punch_in
 btns_punch[0].addEventListener('click', async function () {
