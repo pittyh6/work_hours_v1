@@ -6,8 +6,7 @@ const { Schema, model } = mongoose;
 const workSchema = new Schema({
     _id: Number,
     name_user: String,
-    // day: Date,
-    day: {type:Date, default: Date.now},
+    day: { type: Date, default: Date.now },
     week_day: String,
     punch_in: String,
     punch_out: String,

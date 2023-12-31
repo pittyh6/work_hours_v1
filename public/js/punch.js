@@ -33,22 +33,32 @@ btns_punch[0].addEventListener('click', async function () {
     console.log("btns_punch: " + btns_punch[0].innerHTML)
 
 
-try{
-    const response = await fetch('/punch', {
-        method: 'POST',
-        headers:{
-            'Content-Type': 'application/json',
-        }
-    })
-    const data = await response.json()
-    if(data.success) {
-        alert('Punch saved successfully!')
-    }else{
-        alert("Error saving punch!")
+    try {
+        const response = await fetch('/punch', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                clockIn: time,
+            }),
+        });
+
+        
+
+        /*const data = await response.json()
+        console.log('Response:', response);
+        console.log('Data:', data);
+
+        if (data.success) {
+            alert('Punch saved successfully!')
+        } else {
+            alert("Error saving punch!")
+        }*/
+
+    } catch (error) {
+        console.error("Error punch: " + error)
     }
-}catch(error){
-    console.error("Error punch: " + error)
-}
 
 
     /*try{
