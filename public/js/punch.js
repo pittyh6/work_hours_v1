@@ -33,59 +33,6 @@ btns_punch[0].addEventListener('click', async function () {
     console.log("btns_punch: " + btns_punch[0].innerHTML)
 
 
-    try {
-        const response = await fetch('/punch', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                clockIn: time,
-            }),
-        });
-
-        
-
-        /*const data = await response.json()
-        console.log('Response:', response);
-        console.log('Data:', data);
-
-        if (data.success) {
-            alert('Punch saved successfully!')
-        } else {
-            alert("Error saving punch!")
-        }*/
-
-    } catch (error) {
-        console.error("Error punch: " + error)
-    }
-
-
-    /*try{
-       await punch(id_user_value,name_user_value,date,weekDay,time)
-    }catch(error){
-        console.log("Error in button clock_in: " + error)
-    }*/
-    /*
-        try {
-            const newPunchIn = new Work({
-                _id: id_user_value,
-                name_user: name_user_value,
-                day: date,
-                week_day: weekDay,
-                punch_in: time,
-                punch_out: '18:50',
-                break_in: '12:00',
-                break_out: '12:30',
-            })
-            newPunchIn.save().then(savePunchIn => {
-                console.log('Punch in saved:', savedPunchIn);
-            }).catch(saveError => {
-                console.error('Error saving punch in:', saveError);
-            });
-        } catch (error) {
-            console.log("Error saving new punchIn: ", error)
-        }*/
 })
 
 
