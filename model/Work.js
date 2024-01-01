@@ -4,7 +4,7 @@ const { Schema, model } = mongoose;
 
 //create schema for workdb
 const workSchema = new Schema({
-    _id: Number,
+    id_user: Number,
     name_user: String,
     day: { type: Date, default: Date.now },
     week_day: String,

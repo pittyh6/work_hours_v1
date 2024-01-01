@@ -70,7 +70,7 @@ app.post("/punch", async function (req, res) {
 
     try {
         const newPunch = await new Work({
-            _id: 100001,
+            id_user: 100001,
             name_user: "Priscila",
             day: currentDay,
             week_day: weekDay,
@@ -80,7 +80,8 @@ app.post("/punch", async function (req, res) {
             break_out: '12:30',
         })
         await newPunch.save()
-        res.json({ success: true, message: 'Punch saved successfully!' })
+        //res.json({ success: true, message: 'Punch saved successfully!' })
+        console.log("punch in add successfully")
     } catch (error) {
         console.error('Error saving punch:', error);
         res.status(500).json({ success: false, message: 'Error saving punch.' });
