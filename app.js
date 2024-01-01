@@ -56,12 +56,7 @@ app.get('/punch', function (req, res) {
 //add clock-in
 //import {punch} from './public/js/script.js'
 app.post("/punch", async function (req, res) {
-    const clockin = req.body.clockIn
-    const clockout = req.body.clockOut
-    const breakstart = req.body.breakStart
-    const breakend = req.body.breakEnd
-    //punch(Work)
-    // res.render('pages/')
+
     const currentDay = new Date()
     const dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const weekDay = dayOfWeek[currentDay.getDay()]
@@ -70,8 +65,8 @@ app.post("/punch", async function (req, res) {
 
     try {
         const newPunch = await new Work({
-            id_user: 100001,
-            name_user: "Priscila",
+            id_user: user_id,
+            name_user: user_name,
             day: currentDay,
             week_day: weekDay,
             punch_in: hour,
