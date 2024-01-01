@@ -66,7 +66,8 @@ app.post("/punch", async function (req, res) {
     const dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const weekDay = dayOfWeek[currentDay.getDay()]
     const hour = `${currentDay.getHours()}:${currentDay.getMinutes()}`
-    
+
+
     try {
         const newPunch = await new Work({
             _id: 100001,

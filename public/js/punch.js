@@ -32,14 +32,6 @@ btns_punch[0].addEventListener('click', async function () {
     console.log("id_user_value: " + id_user_value)
     console.log("btns_punch: " + btns_punch[0].innerHTML)
 
-    try {
-        const response = await fetch('/punch', {
-            date, time, weekDay, name_user_value, id_user_value
-        })
-        console.log("punch-in: " + response)
-    }catch(error){
-        console.error(`punch-in error: ${error.message}`)
-    }
 })
 
 
