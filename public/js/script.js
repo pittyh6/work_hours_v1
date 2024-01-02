@@ -1,5 +1,5 @@
 //import Work from '../model/Work.js'; 
-export async function punch(id_user_value,name_user_value,date,weekDay,time){
+/*export async function punch(id_user_value,name_user_value,date,weekDay,time){
     
     console.log("enter punch function...")
     try {
@@ -21,4 +21,20 @@ export async function punch(id_user_value,name_user_value,date,weekDay,time){
         console.error('Error saving new punchIn:', error);
         throw error; // Rethrow the error to propagate it up
     }
+}*/
+
+export async function punchIn(name_user_value,id_user_value){
+    console.log("name: " + name_user_value, " id: " + id_user_value)
+    const user_data = [name_user_value,id_user_value]
+    const options = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({user_data})
+    }
+    const response = await fetch('/punch', options)
+    const jsonData = await response.json()
+    console.log("response: " + response)
 }
+

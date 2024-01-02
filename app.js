@@ -56,8 +56,9 @@ app.get('/punch', function (req, res) {
 //add clock-in
 //import {punch} from './public/js/script.js'
 app.post("/punch", async function (req, res) {
-
+    /* FIRST SOLUTION
     const currentDay = new Date()
+    const day = currentDay.getFullYear() + '-' + (currentDay.getMonth() + 1) + '-' + currentDay.getDate();
     const dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const weekDay = dayOfWeek[currentDay.getDay()]
     const hour = `${currentDay.getHours()}:${currentDay.getMinutes()}`
@@ -81,6 +82,12 @@ app.post("/punch", async function (req, res) {
         console.error('Error saving punch:', error);
         res.status(500).json({ success: false, message: 'Error saving punch.' });
     }
+    END FIRST SOLUTION*/
+
+
+    const user_name = req.body.user_data[0]
+    const user_id = req.body.user_data[1]
+    console.log("punch in app.js: " + user_name,  " user id: " + user_id)
 })
 
 //start server
