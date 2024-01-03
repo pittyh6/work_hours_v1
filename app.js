@@ -87,7 +87,23 @@ app.post("/punch", async function (req, res) {
 
     const user_name = req.body.user_data[0]
     const user_id = req.body.user_data[1]
+    const date = req.body.user_data[2]
+    const time = req.body.user_data[3]
+    const weekDay = req.body.user_data[4]
     console.log("punch in app.js: " + user_name,  " user id: " + user_id)
+
+    try{
+        const newPunch = await new Work({
+            id_user:user_id ,
+            name_user: user_name,
+            day: date,
+            week_day: weekDay,
+            punch_in: time,
+        })
+        await newPunch.save()
+    }catch(error){
+        console.error("Error punch in: " + error)
+    }
 })
 
 //start server

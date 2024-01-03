@@ -23,9 +23,9 @@
     }
 }*/
 
-export async function punchIn(name_user_value,id_user_value){
+export async function punchIn(name_user_value,id_user_value,date,time,weekDay){
     console.log("name: " + name_user_value, " id: " + id_user_value)
-    const user_data = [name_user_value,id_user_value]
+    const user_data = [name_user_value,id_user_value,date,time,weekDay]
     const options = {
         method: 'POST',
         headers: {

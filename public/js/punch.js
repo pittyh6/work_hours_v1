@@ -33,7 +33,7 @@ btns_punch[0].addEventListener('click', async function () {
     console.log("id_user_value: " + id_user_value)
     console.log("btns_punch: " + btns_punch[0].innerHTML)
 
-    punchIn(name_user_value,id_user_value,)
+    punchIn(name_user_value,id_user_value,date,time,weekDay)
 })
 
 
