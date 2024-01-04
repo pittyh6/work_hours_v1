@@ -90,20 +90,37 @@ app.post("/punch", async function (req, res) {
     const date = req.body.user_data[2]
     const time = req.body.user_data[3]
     const weekDay = req.body.user_data[4]
-    console.log("punch in app.js: " + user_name,  " user id: " + user_id)
+    console.log("punch in app.js: " + user_name, " user id: " + user_id)
 
-    try{
-        const newPunch = await new Work({
-            id_user:user_id ,
-            name_user: user_name,
-            day: date,
-            week_day: weekDay,
-            punch_in: time,
-        })
-        await newPunch.save()
-    }catch(error){
-        console.error("Error punch in: " + error)
-    }
+    Work.findOne({ id_user: user_id, day: date,punch_in: { $ne: null, $ne: "" }} ).then(foundPunch => {
+        if (!foundPunch) {
+            try {
+                //const newPunch = await new Work({
+                const newPunch = new Work({
+                    id_user: user_id,
+                    name_user: user_name,
+                    day: date,
+                    week_day: weekDay,
+                    punch_in: time,
+                })
+                //await newPunch.save()
+                newPunch.save().then(savedPunch => {
+                    console.log('Punch saved successfully:', savedPunch);
+                }).catch(saveError => {
+                    console.error('Error saving punch:', saveError);
+                });
+            } catch (error) {
+                console.error("Error punch in: " + error)
+            }
+        }else{
+            console.log("Punch already exist")
+        }
+    }).catch (error => {
+        console.error("Error finding list: ", error)
+        res.status(500).send("Internal Server Error..")
+    })
+
+
 })
 
 //start server
