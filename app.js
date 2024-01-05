@@ -56,35 +56,7 @@ app.get('/punch', function (req, res) {
 //add clock-in
 //import {punch} from './public/js/script.js'
 app.post("/punch", async function (req, res) {
-    /* FIRST SOLUTION
-    const currentDay = new Date()
-    const day = currentDay.getFullYear() + '-' + (currentDay.getMonth() + 1) + '-' + currentDay.getDate();
-    const dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    const weekDay = dayOfWeek[currentDay.getDay()]
-    const hour = `${currentDay.getHours()}:${currentDay.getMinutes()}`
-
-
-    try {
-        const newPunch = await new Work({
-            id_user: user_id,
-            name_user: user_name,
-            day: currentDay,
-            week_day: weekDay,
-            punch_in: hour,
-            punch_out: '18:50',
-            break_in: '12:00',
-            break_out: '12:30',
-        })
-        await newPunch.save()
-        //res.json({ success: true, message: 'Punch saved successfully!' })
-        console.log("punch in add successfully")
-    } catch (error) {
-        console.error('Error saving punch:', error);
-        res.status(500).json({ success: false, message: 'Error saving punch.' });
-    }
-    END FIRST SOLUTION*/
-
-
+   
     const user_name = req.body.user_data[0]
     const user_id = req.body.user_data[1]
     const date = req.body.user_data[2]
@@ -108,7 +80,8 @@ app.post("/punch", async function (req, res) {
                 //await newPunch.save()
                 newPunch.save().then(savedPunch => {
                     console.log('Punch saved successfully:', savedPunch);
-                    res.json({ success: true, message: 'Punch saved successfully!', punch: savedPunch });
+                    //res.json({ success: true, message: 'Punch saved successfully!', punch: savedPunch });
+                    res.render('pages/index')
                 }).catch(saveError => {
                     console.error('Error saving punch:', saveError);
                     res.status(400).json({ success: false, message: 'Punch_in is null or empty. Not creating a new punch.' });
@@ -118,12 +91,14 @@ app.post("/punch", async function (req, res) {
             }
         } else {
             console.log("Punch already exist")
-            res.json({ success: false, message: 'Punch already exists.' });
+            //res.json({ success: false, message: 'Punch already exists.' });
+            res.redirect('/')
+            return
         }
     }).catch(error => {
         console.error("Error finding list: ", error)
-        res.status(500).send("Internal Server Error..")
-        res.status(500).json({ success: false, message: 'An unexpected error occurred.', error: error });
+        //res.status(500).send("Internal Server Error..")
+        //res.status(500).json({ success: false, message: 'An unexpected error occurred.', error: error });
 
     })
 
