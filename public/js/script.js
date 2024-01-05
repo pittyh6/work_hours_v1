@@ -36,5 +36,6 @@ export async function punchIn(name_user_value,id_user_value,date,time,weekDay){
     const response = await fetch('/punch', options)
     const jsonData = await response.json()
     console.log("response: " + response)
+    
 }
 
