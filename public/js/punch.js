@@ -20,28 +20,25 @@ var weekDay = dayOfWeek[currentDay.getDay()]
 //import {punch} from '../js/script.js'
 //import {punch} from './../../model/Work.js'
 //punch_in
-import {punchIn} from './script.js'
+import { punchIn } from './script.js'
 btns_punch[0].addEventListener('click', async function () {
-    // punchTime(e.target.id)
-    //const currentDay = new Date()
+    punchIn(name_user_value, id_user_value, date, time, weekDay)
+})
 
+//break start
+import {breakIn} from './script.js'
+btn_break_start.addEventListener('click', function (e) {
     console.log("Tue + Dec + 26 + 2023 + 12:19:08 + GMT+1100 + (Australian Eastern Daylight Time)== " + currentDay)
     console.log("date: " + date)
     console.log("time: " + time)
     console.log("weekDay: " + weekDay)
     console.log("name_user_value: " + name_user_value)
     console.log("id_user_value: " + id_user_value)
-    console.log("btns_punch: " + btns_punch[0].innerHTML)
-
-    punchIn(name_user_value,id_user_value,date,time,weekDay)
+    console.log("btns_punch: " + btns_punch[1].innerHTML)
+    breakIn(name_user_value, id_user_value, date, time, weekDay)
 })
-
-/*
+/* 
 btn_clock_out.addEventListener('click', function (e) {
-    punchTime(e.target.id)
-})
-btn_break_start.addEventListener('click', function (e) {
-    punchTime(e.target.id)
 })
 btn_break_end.addEventListener('click', function (e) {
     punchTime(e.target.id)

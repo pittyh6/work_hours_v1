@@ -104,6 +104,10 @@ app.post("/punch", async function (req, res) {
 
 
 })
+//break start
+app.post('/break',async function(req, res) {
+    
+})
 
 //start server
 const PORT = process.env.PORT || 3000;
