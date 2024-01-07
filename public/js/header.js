@@ -23,11 +23,9 @@ window.onload = function () {
 /*add class on hamburg menu click*/
 nav_btn.addEventListener('click', () => {
     if (nav_items.classList.contains('hide')) {
-        console.log("entou if")
         nav_items.classList.remove('hide')
         nav_items.classList.add('show')
     } else {
-        console.log("entou else")
         nav_items.classList.remove('show')
         nav_items.classList.add('hide')
     }

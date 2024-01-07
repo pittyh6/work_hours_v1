@@ -34,27 +34,7 @@ btns_punch[0].addEventListener('click', async function () {
     console.log("btns_punch: " + btns_punch[0].innerHTML)
 
     punchIn(name_user_value,id_user_value,date,time,weekDay)
-/*
-    try{
-        const response = await fetch('/punch',{
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify(user_data)
-        })
-        const data = await response.json()
-        if (data.success) {
-            alert('Punch saved successfully!');
-        } else {
-            alert(`Error saving punch: ${data.message}`);
-        }
-    }catch(error){
-        console.error("Error punch: " + error);
-        alert('An unexpected error occurred while saving punch.');
-    }*/
 })
-
-
-
 
 /*
 btn_clock_out.addEventListener('click', function (e) {
