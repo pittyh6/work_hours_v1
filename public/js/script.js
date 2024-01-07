@@ -1,4 +1,3 @@
-//import Work from '../model/Work.js'; 
 
 export async function punchIn(name_user_value, id_user_value, date, time, weekDay) {
     console.log("name: " + name_user_value, " id: " + id_user_value)
@@ -10,9 +9,6 @@ export async function punchIn(name_user_value, id_user_value, date, time, weekDa
         },
         body: JSON.stringify({ user_data })
     }
-    /*const response = await fetch('/punch', options)
-    const jsonData = await response.json()
-    console.log("response: " + response)*/
     try {
         const response = await fetch('/punch', options);
 
@@ -31,7 +27,7 @@ export async function punchIn(name_user_value, id_user_value, date, time, weekDa
             // Assuming jsonData contains information about success or failure
             if (jsonData.success) {
                 // Redirect to the index page upon success
-                window.location.href = '/'; 
+                window.location.href = '/';
             } else {
                 // Handle other success scenarios or display an error message
                 console.error("Error in punchIn:", jsonData.message);
@@ -46,7 +42,36 @@ export async function punchIn(name_user_value, id_user_value, date, time, weekDa
     }
 }
 
-export function breakIn(name_user_value,id_user_value,date,time,weekDay){
+export async function breakIn(name_user_value, id_user_value, date, time, weekDay) {
     console.log("name: " + name_user_value, " id: " + id_user_value)
+    const user_datab = [name_user_value, id_user_value, date, time, weekDay]
+    const optionsb = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user_datab)
+    }
+    try {
+        const response = await fetch('/break', optionsb)
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+        const contentType = response.headers.get('content-type')
+        if (contentType && contentType.includes("application/json")) {
+            const jsonData = await response.json()
+            console.log("response: ", jsonData)
+            if (jsonData.success) {
+                window.location.href = "/";
+            } else {
+                console.log("Error in clock the start break time", jsonData.message);
+            }
+        } else {
+            console.error("Non-JSON response: ", response.statusText);
+            window.location.href = "/";
+        }
+    }catch(Error){
+        console.error("Network error: ", error).message
+    }
 }
 
