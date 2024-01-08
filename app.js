@@ -62,14 +62,12 @@ app.post("/punch", async function (req, res) {
     const date = req.body.user_data[2]
     const time = req.body.user_data[3]
     const weekDay = req.body.user_data[4]
-    const user_info = req.body.user_data[0]
+
     console.log("punch in app.js: " + user_name, " user id: " + user_id)
-
-
+    //check if punch already exist
     Work.findOne({ id_user: user_id, day: date, punch_in: { $ne: null, $ne: "" } }).then(foundPunch => {
         if (!foundPunch) {
             try {
-                //const newPunch = await new Work({
                 const newPunch = new Work({
                     id_user: user_id,
                     name_user: user_name,
@@ -77,7 +75,6 @@ app.post("/punch", async function (req, res) {
                     week_day: weekDay,
                     punch_in: time,
                 })
-                //await newPunch.save()
                 newPunch.save().then(savedPunch => {
                     console.log('Punch saved successfully:', savedPunch);
                     //res.json({ success: true, message: 'Punch saved successfully!', punch: savedPunch });
@@ -101,12 +98,46 @@ app.post("/punch", async function (req, res) {
         //res.status(500).json({ success: false, message: 'An unexpected error occurred.', error: error });
 
     })
-
-
 })
 //break start
 app.post("/break", async function (req, res) {
     console.log("break start on app.js")
+    const user_name = req.body.user_data[0]
+    const user_id = req.body.user_data[1]
+    const date = req.body.user_data[2]
+    const time = req.body.user_data[3]
+    const weekDay = req.body.user_data[4]
+
+    console.log("break start in app.js: " + user_name, " user id: " + user_id)
+    //check if punch already exist
+    Work.findOne({id_user: user_id, day: date, break_in: { $ne: null, $ne: "" } }).then(foundBreak =>{
+        if(!foundBreak){
+            try{
+                const newPunch = new Work({
+                    id_user: user_id,
+                    name_user: user_name,
+                    day: date,
+                    week_day: weekDay,
+                    break_in: time,
+                })
+                newPunch.save().then(savePunch => {
+                    console.log('Punch saved successfully:', savedPunch);
+                    //res.render('pages/index')
+                }).catch(saveError => {
+                    console.error('Error saving punch:', saveError);
+                    res.status(400).json({ success: false, message: 'Start Break is null or empty. Not creating a new punch.' });
+                });
+            }catch (error) {
+                console.error("Error punch in: " + error)
+            }
+        }else {
+            console.log("break start Punch already exist")
+            //res.redirect('/')
+            return
+        }
+    }).catch(error => {
+        console.error("Error finding list: ", error)
+    })
 })
 
 //start server

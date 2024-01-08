@@ -44,34 +44,44 @@ export async function punchIn(name_user_value, id_user_value, date, time, weekDa
 
 export async function breakIn(name_user_value, id_user_value, date, time, weekDay) {
     console.log("name: " + name_user_value, " id: " + id_user_value)
-    const user_datab = [name_user_value, id_user_value, date, time, weekDay]
-    const optionsb = {
+    const user_data = [name_user_value, id_user_value, date, time, weekDay]
+    const options = {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(user_datab)
+        body: JSON.stringify({ user_data })
     }
     try {
-        const response = await fetch('/break', optionsb)
+        const response = await fetch('/break', options);
+
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`)
+            // If the response status is not OK, throw an error
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const contentType = response.headers.get('content-type')
+
+        const contentType = response.headers.get("content-type");
+
         if (contentType && contentType.includes("application/json")) {
-            const jsonData = await response.json()
-            console.log("response: ", jsonData)
+            // If the content type is JSON, try to parse it
+            const jsonData = await response.json();
+            console.log("response: ", jsonData);
+
+            // Assuming jsonData contains information about success or failure
             if (jsonData.success) {
-                window.location.href = "/";
+                // Redirect to the index page upon success
+                window.location.href = '/';
             } else {
-                console.log("Error in clock the start break time", jsonData.message);
+                // Handle other success scenarios or display an error message
+                console.error("Error in breakStart:", jsonData.message);
             }
         } else {
-            console.error("Non-JSON response: ", response.statusText);
-            window.location.href = "/";
+            // If it's not JSON, treat it as non-JSON response
+            console.error("Non-JSON response:", response.statusText);
+            window.location.href = '/';
         }
-    }catch(Error){
-        console.error("Network error: ", error).message
+    } catch (error) {
+        console.error("Network error:", error.message);
     }
 }
 
