@@ -128,16 +128,20 @@ app.post("/break", async function (req, res) {
                 console.error("Error update break start: " + error)
             }
         }else if (!foundBreak) {
+
             try {
                 const newPunch = new Work({
                     id_user: user_id,
                     name_user: user_name,
                     day: date,
                     week_day: weekDay,
+                    punch_in: "",
+                    punch_out: "",
                     break_in: time,
+                    break_out: "",
                 })
-                newPunch.save().then(savePunch => {
-                    console.log('Punch break saved successfully:', savedPunch);
+                newPunch.save().then(saveBreakin => {
+                    console.log('Punch break saved successfully:', saveBreakin);
                     //res.render('pages/index')
                 }).catch(saveError => {
                     console.error('Error saving break punch:', saveError);
