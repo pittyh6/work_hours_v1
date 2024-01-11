@@ -113,8 +113,10 @@ app.post("/break", async function (req, res) {
 
     console.log("break start in app.js: " + user_name, " user id: " + user_id)
     //check if punch already exist
-    Work.findOne({ id_user: user_id, day: date, break_in: { $ne: null, $ne: "" } }).then(foundBreak => {
+    //Work.findOne({ id_user: user_id, day: date, break_in: { $ne: null, $ne: "" } }).then(foundBreak => {
+    Work.findOne({ id_user: user_id, day: date, break_in: "" }).then(foundBreak => {
         if (foundBreak) {
+            console.log("found break")
             try {
                 //update the work..
                 const updatePunch = Work.updateOne({ break_in: time })
