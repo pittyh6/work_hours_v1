@@ -28,19 +28,22 @@ btns_punch[0].addEventListener('click', async function () {
 //break start
 import {breakIn} from './script.js'
 btn_break_start.addEventListener('click', function (e) {
-    console.log("Tue + Dec + 26 + 2023 + 12:19:08 + GMT+1100 + (Australian Eastern Daylight Time)== " + currentDay)
-    console.log("date: " + date)
-    console.log("time: " + time)
-    console.log("weekDay: " + weekDay)
-    console.log("name_user_value: " + name_user_value)
-    console.log("id_user_value: " + id_user_value)
-    console.log("btns_punch: " + btns_punch[1].innerHTML)
     breakIn(name_user_value, id_user_value, date, time, weekDay)
+})
+//break end
+import {breakEnd} from './script.js'
+btn_break_end.addEventListener('click', function (e) {
+    console.log("Tue + Dec + 26 + 2023 + 12:19:08 + GMT+1100 + (Australian Eastern Daylight Time)== " + currentDay)
+   console.log("date: " + date)
+   console.log("time: " + time)
+   console.log("weekDay: " + weekDay)
+   console.log("name_user_value: " + name_user_value)
+   console.log("id_user_value: " + id_user_value)
+   console.log("btns_punch: " + btns_punch[2].innerHTML)
+   breakEnd(name_user_value, id_user_value, date, time, weekDay)
 })
 /* 
 btn_clock_out.addEventListener('click', function (e) {
-})
-btn_break_end.addEventListener('click', function (e) {
-    punchTime(e.target.id)
+   
 })
 */

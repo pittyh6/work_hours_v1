@@ -85,3 +85,6 @@ export async function breakIn(name_user_value, id_user_value, date, time, weekDa
     }
 }
 
+export async function breakEnd (name_user_value, id_user_value, date, time, weekDay){
+
+}
