@@ -150,7 +150,6 @@ app.post("/punch", async function (req, res) {
 })
 //break start
 app.post("/break", async function (req, res) {
-    console.log("break start on app.js")
     const user_name = req.body.user_data[0]
     const user_id = req.body.user_data[1]
     const date = req.body.user_data[2]
@@ -210,6 +209,12 @@ app.post("/break", async function (req, res) {
         }
     })
 })
+//break end
+app.post('breakend', async function (req, res) {
+    console.log("break end on app.js")
+    
+})
+
 //start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

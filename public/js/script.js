@@ -1,3 +1,4 @@
+import { json } from "body-parser";
 
 export async function punchIn(name_user_value, id_user_value, date, time, weekDay) {
     console.log("name: " + name_user_value, " id: " + id_user_value)
@@ -86,5 +87,34 @@ export async function breakIn(name_user_value, id_user_value, date, time, weekDa
 }
 
 export async function breakEnd (name_user_value, id_user_value, date, time, weekDay){
-
+    console.log("name: " + name_user_value, " id: " + id_user_value)
+    const user_data = [name_user_value, id_user_value, date, time, weekDay]
+    const options = {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({user_data})
+    }
+    try{
+        const response = await fetch('/breakend',options);
+        if(!response.ok){
+            throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+        const contentType = response.headers.get("content-type")
+        if(contentType && contentType.includes("application/json")){
+            const jsonData = await response.json()
+            console.log("response: ", jsonData)
+            if(jsonData.success){
+                window.location.href("/")
+            }else{
+                console.log("Error in end break: ", jsonData.message)
+            }
+        }else{
+            console.error("Non-JSON response:", response.statusText);
+            window.location.href = '/';
+        }
+    }catch (error) {
+        console.error("Network error:", error.message);
+    }
 }
