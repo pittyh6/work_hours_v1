@@ -1,4 +1,4 @@
-import { json } from "body-parser";
+//import { json } from "body-parser";
 
 export async function punchIn(name_user_value, id_user_value, date, time, weekDay) {
     console.log("name: " + name_user_value, " id: " + id_user_value)
@@ -106,7 +106,7 @@ export async function breakEnd (name_user_value, id_user_value, date, time, week
             const jsonData = await response.json()
             console.log("response: ", jsonData)
             if(jsonData.success){
-                window.location.href("/")
+                window.location.href = '/'
             }else{
                 console.log("Error in end break: ", jsonData.message)
             }
