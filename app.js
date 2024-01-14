@@ -173,7 +173,7 @@ app.post("/break", async function (req, res) {
                 console.error("Error update break start: " + error)
             }
         } else if (!foundBreak) {
-            Work.findOne({ id_user: user_id, day: date, break_in: { $ne: "" } }).then(foundBreak => {
+            Work.findOne({ id_user: user_id, day: date, break_in: { $ne: "" }}).then(foundBreak => {
                 if (!foundBreak) {
                     try {
                         const newPunch = new Work({
@@ -233,7 +233,7 @@ app.post('/breakend', async function (req, res) {
                 console.error("Error update break out: " + error)
             }
         } else if (!foundBreakout) {
-            Work.findOne({ id_user: user_id, day: date, break_in: { $ne: "" } }).then(foundBreak => {
+            Work.findOne({ id_user: user_id, day: date, break_out: { $ne: "" } }).then(foundBreak => {
                 if (!foundBreak) {
                     try {
                         const newPunch = new Work({
