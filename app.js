@@ -233,35 +233,39 @@ app.post('/breakend', async function (req, res) {
                 console.error("Error update break out: " + error)
             }
         } else if (!foundBreakout) {
-            try {
-                const newPunch = new Work({
-                    id_user: user_id,
-                    name_user: user_name,
-                    day: date,
-                    week_day: weekDay,
-                    punch_in: "",
-                    punch_out: "",
-                    break_in: "",
-                    break_out: time,
-                })
-                newPunch.save().then(saveBreakEnd => {
-                    console.log('Punch break saved successfully:', saveBreakEnd);
-                }).catch(saveError => {
-                    console.error('Error saving break punch:', saveError);
-                    res.status(400).json({ success: false, message: 'Start Break is null or empty. Not creating a new punch.' });
-                });
-            }catch (error) {
-                console.error("Error break start punch : " + error)
-            }
-        }else {
-            console.log("break start Punch already exist")
-            //res.redirect('/')
-            return
+            Work.findOne({ id_user: user_id, day: date, break_in: { $ne: "" } }).then(foundBreak => {
+                if (!foundBreak) {
+                    try {
+                        const newPunch = new Work({
+                            id_user: user_id,
+                            name_user: user_name,
+                            day: date,
+                            week_day: weekDay,
+                            punch_in: "",
+                            punch_out: "",
+                            break_in: "",
+                            break_out: time,
+                        })
+                        newPunch.save().then(saveBreakEnd => {
+                            console.log('Punch break saved successfully:', saveBreakEnd);
+                        }).catch(saveError => {
+                            console.error('Error saving break punch:', saveError);
+                            res.status(400).json({ success: false, message: 'Start Break is null or empty. Not creating a new punch.' });
+                        });
+                    } catch (error) {
+                        console.error("Error break start punch : " + error)
+                    }
+                } else {
+                    console.log("break start Punch already exist")
+                    //res.redirect('/')
+                    return
+                }
+            }).catch(error => {
+                console.error("Error finding list: ", error)
+                //res.status(500).send("Internal Server Error..")
+                //res.status(500).json({ success: false, message: 'An unexpected error occurred.', error: error });
+            })
         }
-    }).catch(error => {
-        console.error("Error finding list: ", error)
-        //res.status(500).send("Internal Server Error..")
-        //res.status(500).json({ success: false, message: 'An unexpected error occurred.', error: error });
     })
 })
 
