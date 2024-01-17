@@ -35,13 +35,7 @@ import { breakEnd } from './script.js'
 btn_break_end.addEventListener('click', function (e) {
     breakEnd(name_user_value, id_user_value, date, time, weekDay)
 })
+import{punchOut} from './script.js'
 btn_clock_out.addEventListener('click', function (e) {
-    console.log("Tue + Dec + 26 + 2023 + 12:19:08 + GMT+1100 + (Australian Eastern Daylight Time)== " + currentDay)
-    console.log("date: " + date)
-    console.log("time: " + time)
-    console.log("weekDay: " + weekDay)
-    console.log("name_user_value: " + name_user_value)
-    console.log("id_user_value: " + id_user_value)
-    console.log("btns_punch: " + btns_punch[2].innerHTML)
     punchOut(name_user_value, id_user_value, date, time, weekDay)
 })
