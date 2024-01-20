@@ -65,42 +65,6 @@ app.post("/punch", async function (req, res) {
 
     console.log("punch in app.js: " + user_name, " user id: " + user_id)
     //check if punch already exist
-    /*Work.findOne({ id_user: user_id, day: date, punch_in: { $ne: null, $ne: "" } }).then(foundPunch => {
-        if (!foundPunch) {
-            try {
-                const newPunch = new Work({
-                    id_user: user_id,
-                    name_user: user_name,
-                    day: date,
-                    week_day: weekDay,
-                    punch_in: time,
-                    punch_out: "",
-                    break_in: "",
-                    break_out: "",
-                })
-                newPunch.save().then(savedPunch => {
-                    console.log('Punch saved successfully:', savedPunch);
-                    //res.json({ success: true, message: 'Punch saved successfully!', punch: savedPunch });
-                    res.render('pages/index')
-                }).catch(saveError => {
-                    console.error('Error saving punch:', saveError);
-                    res.status(400).json({ success: false, message: 'Punch_in is null or empty. Not creating a new punch.' });
-                });
-            } catch (error) {
-                console.error("Error punch in: " + error)
-            }
-        } else {
-            console.log("Punch already exist")
-            //res.json({ success: false, message: 'Punch already exists.' });
-            res.redirect('/')
-            return
-        }
-    }).catch(error => {
-        console.error("Error finding list: ", error)
-        //res.status(500).send("Internal Server Error..")
-        //res.status(500).json({ success: false, message: 'An unexpected error occurred.', error: error });
-
-    })*/
     Work.findOne({ id_user: user_id, day: date, punch_in: { $ne: null, $ne: "" } }).then(foundPunch => {
         Work.findOne({
             id_user: user_id, day: date, $or: [
@@ -158,7 +122,7 @@ app.post("/break", async function (req, res) {
 
     console.log("break start in app.js: " + user_name, " user id: " + user_id)
     //check if punch already exist
-    Work.findOne({ id_user: user_id, day: date, break_in: { $in: [null, ""] }, break_out: { $in: [null, ""] } }).then(foundBreak => {
+    Work.findOne({ id_user: user_id, day: date, break_in: { $in: [null, ""] }, break_out: { $in: [null, ""] }, punch_out: { $in: [null, ""] } }).then(foundBreak => {
         if (foundBreak) {
             try {
                 //update the work..
@@ -177,6 +141,7 @@ app.post("/break", async function (req, res) {
                 Work.findOne({
                     id_user: user_id, day: date, $or: [
                         { punch_out: { $exists: true, $in: [null, ""] } },
+                        { break_in: { $exists: true, $in: [null, ""] } },
                         { break_out: { $exists: true, $in: [null, ""] } },
                     ]
                 }).then(otherPunch => {
@@ -224,14 +189,14 @@ app.post('/breakend', async function (req, res) {
     const date = req.body.user_data[2]
     const time = req.body.user_data[3]
     const weekDay = req.body.user_data[4]
-    console.log("break start in app.js: " + user_name, " user id: " + user_id)
+    console.log("break end in app.js: " + user_name, " user id: " + user_id)
     //check if punch already exist
-    Work.findOne({ id_user: user_id, day: date, break_out: { $in: [null, ""] } }).then(foundBreakout => {
+    Work.findOne({ id_user: user_id, day: date, break_out: { $in: [null, ""] }, punch_out: { $in: [null, ""] } }).then(foundBreakout => {
         if (foundBreakout) {
             try {
                 foundBreakout.break_out = time
                 foundBreakout.save().then(saveUpdate => {
-                    console.log("Update break start successfully: ", saveUpdate)
+                    console.log("Update break end successfully: ", saveUpdate)
                 }).catch(saveError => {
                     console.log("Error saving update break end : ", saveError)
                     res.status(400).json({ success: false, message: 'End Break is null or empty. Not creating a new punch.' })
@@ -241,32 +206,39 @@ app.post('/breakend', async function (req, res) {
             }
         } else if (!foundBreakout) {
             Work.findOne({ id_user: user_id, day: date, break_out: { $ne: "" } }).then(foundBreak => {
-                if (!foundBreak) {
-                    try {
-                        const newPunch = new Work({
-                            id_user: user_id,
-                            name_user: user_name,
-                            day: date,
-                            week_day: weekDay,
-                            punch_in: "",
-                            punch_out: "",
-                            break_in: "",
-                            break_out: time,
-                        })
-                        newPunch.save().then(saveBreakEnd => {
-                            console.log('Punch break saved successfully:', saveBreakEnd);
-                        }).catch(saveError => {
-                            console.error('Error saving break punch:', saveError);
-                            res.status(400).json({ success: false, message: 'Start Break is null or empty. Not creating a new punch.' });
-                        });
-                    } catch (error) {
-                        console.error("Error break start punch : " + error)
+                Work.findOne({
+                    id_user: user_id, day: date, $or: [
+                        { punch_out: { $exists: true, $in: [null, ""] } },
+                        { break_out: { $exists: true, $in: [null, ""] } },
+                    ]
+                }).then(otherPunch => {
+                    if (!otherPunch) {
+                        try {
+                            const newPunch = new Work({
+                                id_user: user_id,
+                                name_user: user_name,
+                                day: date,
+                                week_day: weekDay,
+                                punch_in: "",
+                                punch_out: "",
+                                break_in: "",
+                                break_out: time,
+                            })
+                            newPunch.save().then(saveBreakEnd => {
+                                console.log('Punch break saved successfully:', saveBreakEnd);
+                            }).catch(saveError => {
+                                console.error('Error saving break punch:', saveError);
+                                res.status(400).json({ success: false, message: 'Start Break is null or empty. Not creating a new punch.' });
+                            });
+                        } catch (error) {
+                            console.error("Error break start punch : " + error)
+                        }
+                    } else {
+                        console.log("break start Punch already exist")
+                        //res.redirect('/')
+                        return
                     }
-                } else {
-                    console.log("break start Punch already exist")
-                    //res.redirect('/')
-                    return
-                }
+                })
             }).catch(error => {
                 console.error("Error finding list: ", error)
                 //res.status(500).send("Internal Server Error..")
@@ -276,7 +248,7 @@ app.post('/breakend', async function (req, res) {
     })
 })
 //punch out
-app.post('/punchOut', async function(req, res){
+app.post('/punchOut', async function (req, res) {
     console.log("pounch out on app.js")
     const user_name = req.body.user_data[0]
     const user_id = req.body.user_data[1]
@@ -284,9 +256,9 @@ app.post('/punchOut', async function(req, res){
     const time = req.body.user_data[3]
     const weekDay = req.body.user_data[4]
     console.log("punch out in app.js: " + user_name, " user id: " + user_id)
-    Work.findOne({id_user: user_id, day: date, punch_out: { $in: [null, ""] }}).then(foundPunchout => {
-        if(foundPunchout){
-            try{
+    Work.findOne({ id_user: user_id, day: date, punch_out: { $in: [null, ""] } }).then(foundPunchout => {
+        if (foundPunchout) {
+            try {
                 foundPunchout.punch_out = time
                 foundPunchout.save().then(saveUpdate => {
                     console.log("Update punch out successfully: ", saveUpdate)
@@ -294,37 +266,43 @@ app.post('/punchOut', async function(req, res){
                     console.log("Error saving update break end : ", saveError)
                     res.status(400).json({ success: false, message: 'Punch Out is null or empty. Not creating a new punch.' })
                 })
-            }catch(error){
+            } catch (error) {
                 console.error("Error update punch out: " + error)
             }
-        }else if(!foundPunchout){
-            Work.findOne({id_user: user_id, day: date, break_out: { $ne: "" }}).then(foundPunch => {
-                if(!foundPunch){
-                    try{
-                        const newPunch = new Work ({
-                            id_user: user_id,
-                            name_user: user_name,
-                            day: date,
-                            week_day: weekDay,
-                            punch_in: "",
-                            punch_out: time,
-                            break_in: "",
-                            break_out: "",
-                        })
-                        newPunch.save().then(savePunchout => {
-                            console.log('Punch break saved successfully:', saveBreakEnd);
-                        }).catch(saveError => {
-                            console.error('Error saving break punch:', saveError);
-                            res.status(400).json({ success: false, message: 'Start Break is null or empty. Not creating a new punch.' });
-                        });
-                    }catch (error) {
-                        console.error("Error break start punch : " + error)
+        } else if (!foundPunchout) {
+            Work.findOne({ id_user: user_id, day: date, punch_out: { $ne: "" } }).then(foundPunch => {
+                Work.findOne({
+                    id_user: user_id, day: date, $or: [
+                        { punch_out: { $exists: true, $in: [null, ""] } },
+                    ]
+                }).then(otherPunch => {
+                    if (!otherPunch) {
+                        try {
+                            const newPunch = new Work({
+                                id_user: user_id,
+                                name_user: user_name,
+                                day: date,
+                                week_day: weekDay,
+                                punch_in: "",
+                                punch_out: time,
+                                break_in: "",
+                                break_out: "",
+                            })
+                            newPunch.save().then(savePunchout => {
+                                console.log('Punch out saved successfully:', savePunchout);
+                            }).catch(saveError => {
+                                console.error('Error saving punch out:', saveError);
+                                res.status(400).json({ success: false, message: 'punch out is null or empty. Not creating a new punch.' });
+                            });
+                        } catch (error) {
+                            console.error("Error punch out : " + error)
+                        }
+                    } else {
+                        console.log("Punch out already exist")
+                        //res.redirect('/')
+                        return
                     }
-                }else {
-                    console.log("break start Punch already exist")
-                    //res.redirect('/')
-                    return
-                }
+                })
             }).catch(error => {
                 console.error("Error finding list: ", error)
                 //res.status(500).send("Internal Server Error..")
