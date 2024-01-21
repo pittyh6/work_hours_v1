@@ -61,6 +61,12 @@ app.post("/punch", async function (req, res) {
     const user_id = req.body.user_data[1]
     const date = req.body.user_data[2]
     const time = req.body.user_data[3]
+    // time is in the format "hh:mm"
+    const [hours, minutes] = time.split(':').map(Number);
+    // Format minutes with two decimal places
+    const formattedMinutes = minutes.toFixed(2).padStart(2, '0');
+    // Combine hours and formatted minutes
+    const formattedTime = `${hours}:${formattedMinutes}`;
     const weekDay = req.body.user_data[4]
 
     console.log("punch in app.js: " + user_name, " user id: " + user_id)
@@ -81,7 +87,7 @@ app.post("/punch", async function (req, res) {
                         name_user: user_name,
                         day: date,
                         week_day: weekDay,
-                        punch_in: time,
+                        punch_in: formattedTime,
                         punch_out: "",
                         break_in: "",
                         break_out: "",
@@ -119,6 +125,9 @@ app.post("/break", async function (req, res) {
     const user_id = req.body.user_data[1]
     const date = req.body.user_data[2]
     const time = req.body.user_data[3]
+    const [hours, minutes] = time.split(':').map(Number);
+    const formattedMinutes = minutes.toFixed(2).padStart(2, '0');
+    const formattedTime = `${hours}:${formattedMinutes}`;
     const weekDay = req.body.user_data[4]
 
     console.log("break start in app.js: " + user_name, " user id: " + user_id)
@@ -127,7 +136,7 @@ app.post("/break", async function (req, res) {
         if (foundBreak) {
             try {
                 //update the work..
-                foundBreak.break_in = time
+                foundBreak.break_in = formattedTime
                 foundBreak.save().then(saveUpdate => {
                     console.log("Update break start successfully: ", saveUpdate)
                 }).catch(saveError => {
@@ -142,7 +151,7 @@ app.post("/break", async function (req, res) {
                 Work.findOne({
                     id_user: user_id, day: date, $or: [
                         { punch_out: { $exists: true, $in: [null, ""] } },
-                        { break_in: { $exists: true} },
+                        { break_in: { $exists: true } },
                         { break_out: { $exists: true, $in: [null, ""] } },
                     ]
                 }).then(otherPunch => {
@@ -155,7 +164,7 @@ app.post("/break", async function (req, res) {
                                 week_day: weekDay,
                                 punch_in: "",
                                 punch_out: "",
-                                break_in: time,
+                                break_in: formattedTime,
                                 break_out: "",
                             })
                             newPunch.save().then(saveBreakin => {
@@ -189,13 +198,16 @@ app.post('/breakend', async function (req, res) {
     const user_id = req.body.user_data[1]
     const date = req.body.user_data[2]
     const time = req.body.user_data[3]
+    const [hours, minutes] = time.split(':').map(Number);
+    const formattedMinutes = minutes.toFixed(2).padStart(2, '0');
+    const formattedTime = `${hours}:${formattedMinutes}`;
     const weekDay = req.body.user_data[4]
     console.log("break end in app.js: " + user_name, " user id: " + user_id)
     //check if punch already exist
     Work.findOne({ id_user: user_id, day: date, break_out: { $in: [null, ""] }, punch_out: { $in: [null, ""] } }).then(foundBreakout => {
         if (foundBreakout) {
             try {
-                foundBreakout.break_out = time
+                foundBreakout.break_out = formattedTime
                 foundBreakout.save().then(saveUpdate => {
                     console.log("Update break end successfully: ", saveUpdate)
                 }).catch(saveError => {
@@ -223,7 +235,7 @@ app.post('/breakend', async function (req, res) {
                                 punch_in: "",
                                 punch_out: "",
                                 break_in: "",
-                                break_out: time,
+                                break_out: formattedTime,
                             })
                             newPunch.save().then(saveBreakEnd => {
                                 console.log('Punch break saved successfully:', saveBreakEnd);
@@ -255,12 +267,15 @@ app.post('/punchOut', async function (req, res) {
     const user_id = req.body.user_data[1]
     const date = req.body.user_data[2]
     const time = req.body.user_data[3]
+    const [hours, minutes] = time.split(':').map(Number);
+    const formattedMinutes = minutes.toFixed(2).padStart(2, '0');
+    const formattedTime = `${hours}:${formattedMinutes}`;
     const weekDay = req.body.user_data[4]
-    console.log("punch out in app.js: " + user_name, " user id: " + user_id)
+    console.log("punch out in app.js: " + user_name, " user id: " + user_id, " time: " + time)
     Work.findOne({ id_user: user_id, day: date, punch_out: { $in: [null, ""] } }).then(foundPunchout => {
         if (foundPunchout) {
             try {
-                foundPunchout.punch_out = time
+                foundPunchout.punch_out = formattedTime
                 foundPunchout.save().then(saveUpdate => {
                     console.log("Update punch out successfully: ", saveUpdate)
                 }).catch(saveError => {
@@ -273,11 +288,8 @@ app.post('/punchOut', async function (req, res) {
         } else if (!foundPunchout) {
             Work.findOne({ id_user: user_id, day: date, punch_out: { $ne: "" } }).then(foundPunch => {
                 Work.findOne({
-                    /*id_user: user_id, day: date, $or: [
-                        { punch_out: { $exists: true, $in: [null, "", !null] } },
-                    ]*/
                     id_user: user_id, day: date, punch_out: { $exists: true },
-                    
+
                 }).then(otherPunch => {
                     if (!otherPunch) {
                         try {
@@ -287,7 +299,7 @@ app.post('/punchOut', async function (req, res) {
                                 day: date,
                                 week_day: weekDay,
                                 punch_in: "",
-                                punch_out: time,
+                                punch_out: formattedTime,
                                 break_in: "",
                                 break_out: "",
                             })
