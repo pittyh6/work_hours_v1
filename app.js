@@ -68,6 +68,7 @@ app.post("/punch", async function (req, res) {
     Work.findOne({ id_user: user_id, day: date, punch_in: { $ne: null, $ne: "" } }).then(foundPunch => {
         Work.findOne({
             id_user: user_id, day: date, $or: [
+                { punch_in: { $exists: true } },
                 { punch_out: { $exists: true, $in: [null, ""] } },
                 { break_in: { $exists: true, $in: [null, ""] } },
                 { break_out: { $exists: true, $in: [null, ""] } },
