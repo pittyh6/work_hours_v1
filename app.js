@@ -142,7 +142,7 @@ app.post("/break", async function (req, res) {
                 Work.findOne({
                     id_user: user_id, day: date, $or: [
                         { punch_out: { $exists: true, $in: [null, ""] } },
-                        { break_in: { $exists: true, $in: [null, ""] } },
+                        { break_in: { $exists: true} },
                         { break_out: { $exists: true, $in: [null, ""] } },
                     ]
                 }).then(otherPunch => {
@@ -210,7 +210,7 @@ app.post('/breakend', async function (req, res) {
                 Work.findOne({
                     id_user: user_id, day: date, $or: [
                         { punch_out: { $exists: true, $in: [null, ""] } },
-                        { break_out: { $exists: true, $in: [null, ""] } },
+                        { break_out: { $exists: true } },
                     ]
                 }).then(otherPunch => {
                     if (!otherPunch) {
