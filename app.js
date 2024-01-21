@@ -272,9 +272,11 @@ app.post('/punchOut', async function (req, res) {
         } else if (!foundPunchout) {
             Work.findOne({ id_user: user_id, day: date, punch_out: { $ne: "" } }).then(foundPunch => {
                 Work.findOne({
-                    id_user: user_id, day: date, $or: [
-                        { punch_out: { $exists: true, $in: [null, ""] } },
-                    ]
+                    /*id_user: user_id, day: date, $or: [
+                        { punch_out: { $exists: true, $in: [null, "", !null] } },
+                    ]*/
+                    id_user: user_id, day: date, punch_out: { $exists: true },
+                    
                 }).then(otherPunch => {
                     if (!otherPunch) {
                         try {
