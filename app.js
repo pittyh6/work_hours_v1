@@ -5,13 +5,15 @@ import express from 'express';
 const app = express();
 //const bodyParser = require('body-parser');
 import bodyParser from 'body-parser';
-//format date
-import moment from 'moment';
+
 /*-------------------------------------*/
 
 /* -------------Mongo DB------------*/
 //const mongoose = require('mongoose');
 import mongoose from 'mongoose';
+//format date
+import moment from 'moment';
+
 mongoose.connect("mongodb://localhost:27017/workJamy", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Connected to MongoDB.')
