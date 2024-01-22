@@ -5,7 +5,8 @@ import express from 'express';
 const app = express();
 //const bodyParser = require('body-parser');
 import bodyParser from 'body-parser';
-
+//format date
+import moment from 'moment';
 /*-------------------------------------*/
 
 /* -------------Mongo DB------------*/
