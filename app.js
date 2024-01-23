@@ -69,7 +69,8 @@ app.post("/punch", async function (req, res) {
     // Format minutes with two decimal places
     const formattedMinutes = minutes.toFixed(2).padStart(2, '0');
     // Combine hours and formatted minutes
-    const formattedTime = `${hours}:${formattedMinutes}`;
+    //const formattedTime = `${hours}:${formattedMinutes}`;
+    const formattedTime = `${hours}:${formattedMinutes.split('.')[0]}`;
     const weekDay = req.body.user_data[4]
 
     console.log("punch in app.js: " + user_name, " user id: " + user_id)
@@ -130,7 +131,7 @@ app.post("/break", async function (req, res) {
     const time = req.body.user_data[3]
     const [hours, minutes] = time.split(':').map(Number);
     const formattedMinutes = minutes.toFixed(2).padStart(2, '0');
-    const formattedTime = `${hours}:${formattedMinutes}`;
+    const formattedTime = `${hours}:${formattedMinutes.split('.')[0]}`;
     const weekDay = req.body.user_data[4]
 
     console.log("break start in app.js: " + user_name, " user id: " + user_id)
@@ -203,7 +204,7 @@ app.post('/breakend', async function (req, res) {
     const time = req.body.user_data[3]
     const [hours, minutes] = time.split(':').map(Number);
     const formattedMinutes = minutes.toFixed(2).padStart(2, '0');
-    const formattedTime = `${hours}:${formattedMinutes}`;
+    const formattedTime = `${hours}:${formattedMinutes.split('.')[0]}`;
     const weekDay = req.body.user_data[4]
     console.log("break end in app.js: " + user_name, " user id: " + user_id)
     //check if punch already exist
@@ -272,7 +273,7 @@ app.post('/punchOut', async function (req, res) {
     const time = req.body.user_data[3]
     const [hours, minutes] = time.split(':').map(Number);
     const formattedMinutes = minutes.toFixed(2).padStart(2, '0');
-    const formattedTime = `${hours}:${formattedMinutes}`;
+    const formattedTime = `${hours}:${formattedMinutes.split('.')[0]}`;
     const weekDay = req.body.user_data[4]
     console.log("punch out in app.js: " + user_name, " user id: " + user_id, " time: " + time)
     Work.findOne({ id_user: user_id, day: date, punch_out: { $in: [null, ""] } }).then(foundPunchout => {
