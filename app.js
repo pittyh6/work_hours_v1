@@ -49,7 +49,15 @@ app.use(express.json());
 app.use('/model', express.static('model'));
 
 //Define routes -> redirect to home page when open website
-app.get('/', function (req, res) {
+app.get('/', async function (req, res) {
+    
+    try{
+        //fetch data from mongoDb
+        const workData = await Work.find({id_user:100001})
+    }catch(error){
+        console.log("Error fetching data: ", error)
+        res.status(500).send("Internal Server Error")
+    }
     res.render('pages/index');
 })
 app.get('/punch', function (req, res) {
