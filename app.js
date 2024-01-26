@@ -54,6 +54,7 @@ app.get('/', async function (req, res) {
     try{
         //fetch data from mongoDb
         const workData = await Work.find({id_user:100001})
+        res.render('pages/index', {workData})
     }catch(error){
         console.log("Error fetching data: ", error)
         res.status(500).send("Internal Server Error")
