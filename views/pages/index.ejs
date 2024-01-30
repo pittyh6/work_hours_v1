@@ -15,10 +15,10 @@
     <main class="container main">
         <h1>Clocking</h1>
         <div class="hours">
-            <% workData.forEach(work=> { %>
+            <% workData.forEach(work => { %>
                 <div class="clock_hours">
-                    <p id="sunday" class="day">Sunday: </p>
-                    <p id="clock_in" class="clock">Clock In: <%= work.punch_in%></p>
+                    <p id="sunday" class="day <%= work.week_day === 'Sunday' ? 'current-day' : '' %>">Sunday: </p>
+                    <p id="clock_in" class="clock">Clock In: <%= work.week_day === 'Sunday' ? work.punch_in : '' %></p>
                     <p id="break_in" class="break">Break Start: </p>
                     <p id="break_out" class="break">Break Ends: </p>
                     <p id="clock_out" class="clock">Clock Out: </p>
@@ -26,8 +26,8 @@
                     <hr class="breack_line">
                 </div>
                 <div class="clock_hours">
-                    <p id="monday" class="day">Monday: </p>
-                    <p id="clock_in" class="clock_in">Clock In: </p>
+                    <p id="monday" class="day <%= work.week_day === 'Monday' ? 'current-day' : '' %>">Monday: </p>
+                    <p id="clock_in" class="clock_in">Clock In: <%= work.week_day === 'Monday' ? work.punch_in : '' %></p>
                     <p id="break_in" class="break_start">Break Start: </p>
                     <p id="break_out" class="break_ends">Break Ends: </p>
                     <p id="clock_out" class="clock_out">Clock Out: </p>
@@ -79,7 +79,7 @@
                     <p id="total_hour" class="total">Total Work day: </p>
                     <hr class="breack_line">
                 </div>
-            <% });%>
+            <% }); %>
                 <h4 class="total_week_hour"> Total hour week: </h4>
         </div>
 

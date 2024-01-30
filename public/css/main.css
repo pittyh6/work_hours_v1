@@ -121,3 +121,8 @@ a:hover {
 .clock_hours>p{
   margin-left: 30px;
 }
+
+.current-day {
+  font-weight: bold; /* or any other styling you prefer */
+  color: red; /* or any other color you prefer */
+}
