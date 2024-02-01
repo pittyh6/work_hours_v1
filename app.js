@@ -54,13 +54,14 @@ app.get('/', async function (req, res) {
     try{
         // Fetch data from MongoDB
         const workData = await Work.find({ id_user: 100001 });
+        console.log("workData: ", workData);
         // Pass the fetched data to the template
         res.render('pages/index', { workData });
     }catch(error){
         console.log("Error fetching data: ", error)
         res.status(500).send("Internal Server Error")
     }
-    res.render('pages/index');
+    //res.render('pages/index');
 })
 app.get('/punch', function (req, res) {
     res.render('pages/punch');
