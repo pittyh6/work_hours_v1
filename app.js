@@ -13,6 +13,8 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 //format date
 import moment from 'moment';
+//const {format} = require('date-fns')
+import {format} from 'date-fns';
 
 mongoose.connect("mongodb://localhost:27017/workJamy", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -51,7 +53,8 @@ app.use('/model', express.static('model'));
 //Define routes -> redirect to home page when open website
 app.get('/', async function (req, res) {
     const currentDay = new Date()
-    console.log("current day check: " , currentDay)
+    const formatCurrentDay = currentDay.toISOString().split('T')[0]
+    console.log("current day check: " , formatCurrentDay)
     try{
         // Fetch data from MongoDB
         const workData = await Work.find({ id_user: 100001 });
