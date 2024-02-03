@@ -50,7 +50,8 @@ app.use('/model', express.static('model'));
 
 //Define routes -> redirect to home page when open website
 app.get('/', async function (req, res) {
-    
+    const currentDay = new Date()
+    console.log("current day check: " , currentDay)
     try{
         // Fetch data from MongoDB
         const workData = await Work.find({ id_user: 100001 });

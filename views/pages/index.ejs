@@ -15,71 +15,92 @@
     <main class="container main">
         <h1>Clocking</h1>
         <div class="hours">
+            
+            <!-- <% for (const day in workData) { %>
+             <%= workData[day].week_day  === 'Monday' ? workData[day].week_day : 'It is not' %>
+            <% }%>
+            </br>
             <% workData.forEach(work => { %>
+                <%= work.week_day === 'Monday' ? work.week_day : 'It is not'%>
+            <% }); %> -->
+
+
+            <% workData.forEach(work => { %>
+                <div class="clock_hours">
+                    <p id="sunday" class="day"> <%= work.week_day %> </p>
+                    <p id="clock_in" class="clock">Clock In: <%= work.punch_in %></p>
+                    <p id="break_in" class="break">Break Start: <%= work.break_in %></p>
+                    <p id="break_out" class="break">Break Ends: <%= work.break_out %></p>
+                    <p id="clock_out" class="clock">Clock Out: <%= work.punch_out %></p>
+                    <p id="total_hour" class="total">Total Work day: <%= (work.punch_out) - (work.punch_in)%></p>
+                    <hr class="breack_line">
+                </div>
+                <!-- 
                 <div class="clock_hours">
                     <p id="sunday" class="day <%= work.week_day === 'Sunday' ? 'current-day' : '' %>">Sunday: </p>
                     <p id="clock_in" class="clock">Clock In: <%= work.week_day === 'Sunday' ? work.punch_in : '' %></p>
-                    <p id="break_in" class="break">Break Start: </p>
-                    <p id="break_out" class="break">Break Ends: </p>
-                    <p id="clock_out" class="clock">Clock Out: </p>
+                    <p id="break_in" class="break">Break Start: <%= work.week_day === 'Sunday' ? work.break_in : '' %></p>
+                    <p id="break_out" class="break">Break Ends: <%= work.week_day === 'Sunday' ? work.break_out : '' %></p>
+                    <p id="clock_out" class="clock">Clock Out: <%= work.week_day === 'Sunday' ? work.punch_out : '' %></p>
                     <p id="total_hour" class="total">Total Work day: </p>
                     <hr class="breack_line">
                 </div>
                 <div class="clock_hours">
                     <p id="monday" class="day <%= work.week_day === 'Monday' ? 'current-day' : '' %>">Monday: </p>
                     <p id="clock_in" class="clock_in">Clock In: <%= work.week_day === 'Monday' ? work.punch_in : ''%></p>
-                    <p id="break_in" class="break_start">Break Start: </p>
-                    <p id="break_out" class="break_ends">Break Ends: </p>
-                    <p id="clock_out" class="clock_out">Clock Out: </p>
+                    <p id="break_in" class="break_start">Break Start: <%= work.week_day === 'Monday' ? work.break_in : '' %></p>
+                    <p id="break_out" class="break_ends">Break Ends: <%= work.week_day === 'Monday' ? work.break_out : '' %></p>
+                    <p id="clock_out" class="clock_out">Clock Out:<%= work.week_day === 'Monday' ? work.punch_out : '' %> </p>
                     <p id="total_hour" class="total">Total Work day: </p>
                     <hr class="breack_line">
                 </div>
                 <div class="clock_hours">
                     <p id="tuesday" class="day">Tuesday: </p>
-                    <p id="clock_in" class="clock_in">Clock In: </p>
-                    <p id="break_in" class="break_start">Break Start: </p>
-                    <p id="break_out" class="break_ends">Break Ends: </p>
-                    <p id="clock_out" class="clock_out">Clock Out: </p>
+                    <p id="clock_in" class="clock_in">Clock In: <%= work.week_day === 'Tuesday' ? work.punch_in : ''%></p>
+                    <p id="break_in" class="break_start">Break Start: <%= work.week_day === 'Tuesday' ? work.break_in : '' %></p>
+                    <p id="break_out" class="break_ends">Break Ends: <%= work.week_day === 'Tuesday' ? work.break_out : '' %></p>
+                    <p id="clock_out" class="clock_out">Clock Out:<%= work.week_day === 'Tuesday' ? work.punch_out : '' %> </p>
                     <p id="total_hour" class="total">Total Work day: </p>
                     <hr class="breack_line">
                 </div>
                 <div class="clock_hours">
                     <p id="wednesday" class="day">Wednesday: </p>
-                    <p id="clock_in" class="clock_in">Clock In: </p>
-                    <p id="break_in" class="break_start">Break Start: </p>
-                    <p id="break_out" class="break_ends">Break Ends: </p>
-                    <p id="clock_out" class="clock_out">Clock Out: </p>
+                    <p id="clock_in" class="clock_in">Clock In: <%= work.week_day === 'Wednesday' ? work.punch_in : ''%></p>
+                    <p id="break_in" class="break_start">Break Start: <%= work.week_day === 'Wednesday' ? work.break_in : '' %></p>
+                    <p id="break_out" class="break_ends">Break Ends: <%= work.week_day === 'Wednesday' ? work.break_out : '' %></p>
+                    <p id="clock_out" class="clock_out">Clock Out:<%= work.week_day === 'Wednesday' ? work.punch_out : '' %> </p>
                     <p id="total_hour" class="total">Total Work day: </p>
                     <hr class="breack_line">
                 </div>
                 <div class="clock_hours">
                     <p id="thursday" class="day">Thursday: </p>
-                    <p id="clock_in" class="clock_in">Clock In: </p>
-                    <p id="break_in" class="break_start">Break Start: </p>
-                    <p id="break_out" class="break_ends">Break Ends: </p>
-                    <p id="clock_out" class="clock_out">Clock Out: </p>
+                    <p id="clock_in" class="clock_in">Clock In: <%= work.week_day === 'Thursday' ? work.punch_in : ''%></p>
+                    <p id="break_in" class="break_start">Break Start: <%= work.week_day === 'Thursday' ? work.break_in : '' %></p>
+                    <p id="break_out" class="break_ends">Break Ends: <%= work.week_day === 'Thursday' ? work.break_out : '' %></p>
+                    <p id="clock_out" class="clock_out">Clock Out:<%= work.week_day === 'Thursday' ? work.punch_out : '' %> </p>
                     <p id="total_hour" class="total">Total Work day: </p>
                     <hr class="breack_line">
                 </div>
                 <div class="clock_hours">
-                    <p id="friday" class="day">Friday: </p>
-                    <p id="clock_in" class="clock_in">Clock In: </p>
-                    <p id="break_in" class="break_start">Break Start: </p>
-                    <p id="break_out" class="break_ends">Break Ends: </p>
-                    <p id="clock_out" class="clock_out">Clock Out: </p>
+                    <p id="friday" class="day <%= work.week_day === 'friday' ? 'current-day' : '' %>">Friday: </p>
+                    <p id="clock_in" class="clock_in">Clock In: <%= work.week_day === 'Friday' ? work.punch_in : ''%></p>
+                    <p id="break_in" class="break_start">Break Start: <%= work.week_day === 'Friday' ? work.break_in : '' %></p>
+                    <p id="break_out" class="break_ends">Break Ends: <%= work.week_day === 'Friday' ? work.break_out : '' %></p>
+                    <p id="clock_out" class="clock_out">Clock Out:<%= work.week_day === 'Friday' ? work.punch_out : '' %> </p>
                     <p id="total_hour" class="total">Total Work day: </p>
                     <hr class="breack_line">
                 </div>
                 <div class="clock_hours">
                     <p id="saturday" class="day">Saturday: </p>
-                    <p id="clock_in" class="clock_in">Clock In: </p>
-                    <p id="break_in" class="break_start">Break Start: </p>
-                    <p id="break_out" class="break_ends">Break Ends: </p>
-                    <p id="clock_out" class="clock_out">Clock Out: </p>
+                    <p id="clock_in" class="clock_in">Clock In: <%= work.week_day === 'Saturday' ? work.punch_in : ''%></p>
+                    <p id="break_in" class="break_start">Break Start: <%= work.week_day === 'Saturday' ? work.break_in : '' %></p>
+                    <p id="break_out" class="break_ends">Break Ends: <%= work.week_day === 'Saturday' ? work.break_out : '' %></p>
+                    <p id="clock_out" class="clock_out">Clock Out:<%= work.week_day === 'Saturday' ? work.punch_out : '' %> </p>
                     <p id="total_hour" class="total">Total Work day: </p>
                     <hr class="breack_line">
                 </div>
-            <% }); %>
+                 -->
+        <% }); %>
                 <h4 class="total_week_hour"> Total hour week: </h4>
         </div>
 
