@@ -1,19 +1,15 @@
 
 /*---------------import---------------*/
-//const express = require('express');
 import express from 'express';
 const app = express();
-//const bodyParser = require('body-parser');
 import bodyParser from 'body-parser';
 
 /*-------------------------------------*/
 
 /* -------------Mongo DB------------*/
-//const mongoose = require('mongoose');
 import mongoose from 'mongoose';
 //format date
 import moment from 'moment';
-//const {format} = require('date-fns')
 import { format } from 'date-fns';
 
 mongoose.connect("mongodb://localhost:27017/workJamy", { useNewUrlParser: true, useUnifiedTopology: true })
@@ -22,9 +18,9 @@ mongoose.connect("mongodb://localhost:27017/workJamy", { useNewUrlParser: true, 
     }).catch(error => {
         console.log('Error connecting to MongoDB: ', error);
     })
-//const Work = require('./model/Work');
+
 import Work from './model/Work.js'
-//import './public/js/punch.js'
+
 
 //create new work_day
 const workDay = new Work({
@@ -58,21 +54,12 @@ app.get('/', async function (req, res) {
     const dayOfWeekArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const dayOfWeek = dayOfWeekArr[currentDay.getDay() -1]
 
-    //const previousDay = new Date(currentDay);
-    
-
-    
-    console.log("current dayOfWeek check: ", dayOfWeek)
-    console.log("current day check: ", currentDay)
-    console.log("current formatted day check: ", formatCurrentDay)
-
     try {
         switch (dayOfWeek) {
             
             case 'Sunday':
                 // Fetch data from MongoDB
                 var workData = await Work.find({ id_user: 100001, day: formatCurrentDay })
-                console.log("workData Sunday: ", workData);
                 // Pass the fetched data to the template
                 res.render('pages/index', { workData })
                 break;
@@ -81,7 +68,6 @@ app.get('/', async function (req, res) {
                 previousDay.setDate(currentDay.getDate() - 1);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
                 var workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay }})
-                console.log("workData Monday: ", workData);
                 res.render('pages/index', { workData })
                 break;
             case 'Tuesday':
@@ -89,7 +75,6 @@ app.get('/', async function (req, res) {
                 previousDay.setDate(currentDay.getDate() - 2);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
                 var workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
-                console.log("workData Tuesday: ", workData);
                 res.render('pages/index', { workData })
                 break;
             case 'Wednesday':
@@ -97,7 +82,6 @@ app.get('/', async function (req, res) {
                 previousDay.setDate(currentDay.getDate() - 3);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
                 var workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
-                console.log("workData Wednesday: ", workData);
                 res.render('pages/index', { workData })
                 break;
             case 'Thursday':
@@ -105,7 +89,6 @@ app.get('/', async function (req, res) {
                 previousDay.setDate(currentDay.getDate() - 4);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
                 var workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
-                console.log("workData Thursday: ", workData);
                 res.render('pages/index', { workData })
                 break;
             case 'Friday':
@@ -113,16 +96,13 @@ app.get('/', async function (req, res) {
                 previousDay.setDate(currentDay.getDate() - 5);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
                 var workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
-                console.log("workData Friday: ", workData);
                 res.render('pages/index', { workData })
                 break;
             case 'Saturday':
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 6);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
-                console.log("saturday prev days: " ,formatPreviousDay )
                 var workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
-                console.log("workData Saturday: ", {workData});
                 res.render('pages/index', { workData })
                 break;
         }
@@ -130,26 +110,12 @@ app.get('/', async function (req, res) {
         console.log("Error fetching data: ", error)
         res.status(500).send("Internal Server Error")
     }
-
-    /*
-    try{
-        // Fetch data from MongoDB
-        const workData = await Work.find({ id_user: 100001 });
-        console.log("workData: ", workData);
-        // Pass the fetched data to the template
-        res.render('pages/index', { workData });
-    }catch(error){
-        console.log("Error fetching data: ", error)
-        res.status(500).send("Internal Server Error")
-    }
-    */
 })
 app.get('/punch', function (req, res) {
     res.render('pages/punch');
 })
 
 //add clock-in
-//import {punch} from './public/js/script.js'
 app.post("/punch", async function (req, res) {
 
     const user_name = req.body.user_data[0]
@@ -201,7 +167,6 @@ app.post("/punch", async function (req, res) {
                 }
             } else {
                 console.log("You are not allow to Punch_in. Another punch already exist")
-                //res.json({ success: false, message: 'Punch already exists.' });
                 res.redirect('/')
                 return
             }
@@ -211,7 +176,6 @@ app.post("/punch", async function (req, res) {
         console.error("Error finding list: ", error)
         //res.status(500).send("Internal Server Error..")
         //res.status(500).json({ success: false, message: 'An unexpected error occurred.', error: error });
-
     })
 
 })
@@ -265,7 +229,7 @@ app.post("/break", async function (req, res) {
                             })
                             newPunch.save().then(saveBreakin => {
                                 console.log('Punch break saved successfully:', saveBreakin);
-                                //res.render('pages/index')
+                                res.render('pages/index')
                             }).catch(saveError => {
                                 console.error('Error saving break punch:', saveError);
                                 res.status(400).json({ success: false, message: 'Start Break is null or empty. Not creating a new punch.' });
@@ -275,7 +239,7 @@ app.post("/break", async function (req, res) {
                         }
                     } else {
                         console.log("break start Punch already exist")
-                        //res.redirect('/')
+                        res.redirect('/')
                         return
                     }
                 })
@@ -344,7 +308,7 @@ app.post('/breakend', async function (req, res) {
                         }
                     } else {
                         console.log("break start Punch already exist")
-                        //res.redirect('/')
+                        res.redirect('/')
                         return
                     }
                 })
@@ -410,7 +374,7 @@ app.post('/punchOut', async function (req, res) {
                         }
                     } else {
                         console.log("Punch out already exist")
-                        //res.redirect('/')
+                        res.redirect('/')
                         return
                     }
                 })

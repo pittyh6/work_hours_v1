@@ -1,4 +1,3 @@
-//import { json } from "body-parser";
 
 export async function punchIn(name_user_value, id_user_value, date, time, weekDay) {
     console.log("name: " + name_user_value, " id: " + id_user_value)
