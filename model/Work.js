@@ -7,13 +7,23 @@ const workSchema = new Schema({
     id_user: Number,
     name_user: String,
     //day: { type: Date, default: Date.now, get: v => moment(v).format('DD-MM-YYYY') },
-    day: { type: String, default: () => moment().format('DD-MM-YYYY') },
+    day: { type: String, default: () => moment().format('YYYY-MM-DD') },
     week_day: String,
     punch_in: String,
     punch_out: String,
     break_in: String,
     break_out: String,
-}, { toJSON: { getters: true } }); // This ensures that the getter (moment) is applied when converting to JSON
+},
+    {
+        toJSON: {
+            getters: true,
+            transform: (doc, ret) => {
+                ret.day = moment(ret.day).format('YYYY-MM-DD'); // Format the date in 'YYYY-MM-DD' before returning JSON
+                return ret;
+            },
+        },
+    }
+); // This ensures that the getter (moment) is applied when converting to JSON
 
 //create model
 const Work = mongoose.model('Work', workSchema);
@@ -28,7 +38,7 @@ export default Work;
     {
         id_user: 100001,
         name_user: 'Priscila',
-        day: '2024-1-21',
+        day: '2024-01-28',
         week_day: 'Sunday',
         punch_in: '8:00',
         punch_out: '16:00',
@@ -38,17 +48,17 @@ export default Work;
     {
         id_user: 100001,
         name_user: 'Priscila',
-        day: '2024-1-22',
+        day: '2024-01-29',
         week_day: 'Monday',
-        punch_in: '8:00',
-        punch_out: '16:00',
-        break_in: '12:10',
-        break_out: '13:10',
+        punch_in: '8:05',
+        punch_out: '16:03',
+        break_in: '12:07',
+        break_out: '13:11',
     },
     {
         id_user: 100001,
         name_user: 'Priscila',
-        day: '2024-1-23',
+        day: '2024-01-30',
         week_day: 'Tuesday',
         punch_in: '8:30',
         punch_out: '14:30',
@@ -58,7 +68,7 @@ export default Work;
     {
         id_user: 100001,
         name_user: 'Priscila',
-        day: '2024-1-24',
+        day: '2024-01-31',
         week_day: 'Wednesday',
         punch_in: '8:30',
         punch_out: '17:30',
@@ -68,7 +78,7 @@ export default Work;
     {
         id_user: 100001,
         name_user: 'Priscila',
-        day: '2024-1-25',
+        day: '2024-02-01',
         week_day: 'Thursday',
         punch_in: '9:00',
         punch_out: '15:15',
@@ -78,11 +88,21 @@ export default Work;
     {
         id_user: 100001,
         name_user: 'Priscila',
-        day: '2024-1-26',
+        day: '2024-02-02',
         week_day: 'Friday',
         punch_in: '8:45',
         punch_out: '16:50',
         break_in: '12:25',
         break_out: '13:35'
-    }
+    },
+    {
+        id_user: 100001,
+        name_user: 'Priscila',
+        day: '2024-02-03',
+        week_day: 'Saturday',
+        punch_in: '7:41',
+        punch_out: '15:52',
+        break_in: '12:22',
+        break_out: '13:37'
+    },
 ])*/

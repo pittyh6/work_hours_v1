@@ -16,18 +16,12 @@
         <h1>Clocking</h1>
         <div class="hours">
             
-            <!-- <% for (const day in workData) { %>
-             <%= workData[day].week_day  === 'Monday' ? workData[day].week_day : 'It is not' %>
-            <% }%>
-            </br>
-            <% workData.forEach(work => { %>
-                <%= work.week_day === 'Monday' ? work.week_day : 'It is not'%>
-            <% }); %> -->
+        
 
 
             <% workData.forEach(work => { %>
                 <div class="clock_hours">
-                    <p id="sunday" class="day"> <%= work.week_day %> </p>
+                    <p id="sunday" class="day"> <%= work.week_day %> : <%= work.day %> </p>
                     <p id="clock_in" class="clock">Clock In: <%= work.punch_in %></p>
                     <p id="break_in" class="break">Break Start: <%= work.break_in %></p>
                     <p id="break_out" class="break">Break Ends: <%= work.break_out %></p>

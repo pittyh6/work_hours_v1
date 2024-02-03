@@ -1,5 +1,6 @@
 //import Work from '../../model/Work.js'
 //const Work = require('../../model/Work.js')
+//import moment from 'moment'
 
 const btn_clock_in = document.querySelectorAll('#clock-in')
 const btn_clock_out = document.querySelector('#clock-out')
@@ -11,7 +12,8 @@ const id_user_value = document.querySelector('#id_user').innerHTML
 const btns_punch = document.querySelectorAll('.bnt-clock')
 
 const currentDay = new Date()
-var date = currentDay.getFullYear() + '-' + (currentDay.getMonth() + 1) + '-' + currentDay.getDate();
+//var date = currentDay.getFullYear() + '-' + (currentDay.getMonth() + 1) + '-' + currentDay.getDate();
+var date = currentDay.toISOString().split('T')[0]
 var time = currentDay.getHours() + ":" + currentDay.getMinutes();
 var dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 var weekDay = dayOfWeek[currentDay.getDay()]

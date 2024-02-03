@@ -14,7 +14,7 @@ import mongoose from 'mongoose';
 //format date
 import moment from 'moment';
 //const {format} = require('date-fns')
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 
 mongoose.connect("mongodb://localhost:27017/workJamy", { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -57,9 +57,78 @@ app.get('/', async function (req, res) {
     const dayOfWeekArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const dayOfWeek = dayOfWeekArr[currentDay.getDay()]
 
-    console.log("current dayOfWeek check: " , dayOfWeek)
+    //const previousDay = new Date(currentDay);
+    
 
+    
+    console.log("current dayOfWeek check: ", dayOfWeek)
 
+    try {
+        switch (dayOfWeek) {
+            
+            case 'Sunday':
+                // Fetch data from MongoDB
+                var workData = await Work.find({ id_user: 100001, day: formatCurrentDay })
+                console.log("workData Sunday: ", workData);
+                // Pass the fetched data to the template
+                res.render('pages/index', { workData })
+                break;
+            case 'Monday':
+                var previousDay = new Date(currentDay);
+                previousDay.setDate(currentDay.getDate() - 1);
+                var formatPreviousDay = previousDay.toISOString().split('T')[0];
+                var workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay }})
+                console.log("workData Monday: ", workData);
+                res.render('pages/index', { workData })
+                break;
+            case 'Tuesday':
+                var previousDay = new Date(currentDay);
+                previousDay.setDate(currentDay.getDate() - 2);
+                var formatPreviousDay = previousDay.toISOString().split('T')[0];
+                var workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
+                console.log("workData Tuesday: ", workData);
+                res.render('pages/index', { workData })
+                break;
+            case 'Wednesday':
+                var previousDay = new Date(currentDay);
+                previousDay.setDate(currentDay.getDate() - 3);
+                var formatPreviousDay = previousDay.toISOString().split('T')[0];
+                var workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
+                console.log("workData Wednesday: ", workData);
+                res.render('pages/index', { workData })
+                break;
+            case 'Thursday':
+                var previousDay = new Date(currentDay);
+                previousDay.setDate(currentDay.getDate() - 4);
+                var formatPreviousDay = previousDay.toISOString().split('T')[0];
+                var workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
+                console.log("workData Thursday: ", workData);
+                res.render('pages/index', { workData })
+                break;
+            case 'Friday':
+                var previousDay = new Date(currentDay);
+                previousDay.setDate(currentDay.getDate() - 5);
+                var formatPreviousDay = previousDay.toISOString().split('T')[0];
+                var workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
+                console.log("workData Friday: ", workData);
+                res.render('pages/index', { workData })
+                break;
+            case 'Saturday':
+                var previousDay = new Date(currentDay);
+                previousDay.setDate(currentDay.getDate() - 6);
+                var formatPreviousDay = previousDay.toISOString().split('T')[0];
+                console.log("saturday prev days: " ,formatPreviousDay )
+                var workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
+                console.log("workData Saturday: ", {workData});
+                res.render('pages/index', { workData })
+                break;
+        }
+    } catch (error) {
+        console.log("Error fetching data: ", error)
+        res.status(500).send("Internal Server Error")
+    }
+
+    /*
     try{
         // Fetch data from MongoDB
         const workData = await Work.find({ id_user: 100001 });
@@ -70,6 +139,7 @@ app.get('/', async function (req, res) {
         console.log("Error fetching data: ", error)
         res.status(500).send("Internal Server Error")
     }
+    */
 })
 app.get('/punch', function (req, res) {
     res.render('pages/punch');
