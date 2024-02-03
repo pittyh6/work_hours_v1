@@ -54,7 +54,12 @@ app.use('/model', express.static('model'));
 app.get('/', async function (req, res) {
     const currentDay = new Date()
     const formatCurrentDay = currentDay.toISOString().split('T')[0]
-    console.log("current day check: " , formatCurrentDay)
+    const dayOfWeekArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    const dayOfWeek = dayOfWeekArr[currentDay.getDay()]
+
+    console.log("current dayOfWeek check: " , dayOfWeek)
+
+
     try{
         // Fetch data from MongoDB
         const workData = await Work.find({ id_user: 100001 });
@@ -65,7 +70,6 @@ app.get('/', async function (req, res) {
         console.log("Error fetching data: ", error)
         res.status(500).send("Internal Server Error")
     }
-    //res.render('pages/index');
 })
 app.get('/punch', function (req, res) {
     res.render('pages/punch');
