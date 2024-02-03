@@ -52,16 +52,19 @@ app.use('/model', express.static('model'));
 
 //Define routes -> redirect to home page when open website
 app.get('/', async function (req, res) {
-    const currentDay = new Date()
+    const currentDay = new Date() 
+    currentDay.setDate(currentDay.getDate() + 1)
     const formatCurrentDay = currentDay.toISOString().split('T')[0]
     const dayOfWeekArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    const dayOfWeek = dayOfWeekArr[currentDay.getDay()]
+    const dayOfWeek = dayOfWeekArr[currentDay.getDay() -1]
 
     //const previousDay = new Date(currentDay);
     
 
     
     console.log("current dayOfWeek check: ", dayOfWeek)
+    console.log("current day check: ", currentDay)
+    console.log("current formatted day check: ", formatCurrentDay)
 
     try {
         switch (dayOfWeek) {
