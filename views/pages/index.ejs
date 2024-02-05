@@ -16,64 +16,59 @@
         <h1>Clocking</h1>
         <div class="hours">
             <% workData.forEach(work=> { %>
-                    <div class="clock_hours">
-                        <p id="sunday" class="day">
-                            <%= work.week_day %> : <%= work.day %>
-                        </p>
-                        <p id="clock_in" class="clock">Clock In: <%= work.punch_in %>
-                        </p>
-                        <p id="break_in" class="break">Break Start: <%= work.break_in %>
-                        </p>
-                        <p id="break_out" class="break">Break Ends: <%= work.break_out %>
-                        </p>
-                        <p id="clock_out" class="clock">Clock Out: <%= work.punch_out %>
-                        </p>
-                        
-                        <% if (work.punch_in && work.punch_out) { %>
-                            <% 
-                                const punchInTime = new Date(`2024-02-03 ${work.punch_in}`);
-                                const punchOutTime = new Date(`2024-02-03 ${work.punch_out}`);
-                                
-                                // Check if punchOut is later than punchIn
-                                if (punchOutTime > punchInTime) {
-                                    const timeDiffInMilliseconds = punchOutTime - punchInTime;
-                                    const hours = timeDiffInMilliseconds / (1000 * 60 * 60);
-                                    const formattedHours = hours.toFixed(2); // Format to two decimal places
-                                     
-                            %>
-                            
-                                    <p id="total_hour" class="total">Total Work day: <%= formattedHours %> hours</p>
-                            <% } else { %>
-                                    <p id="total_hour" class="total">Invalid Punch Times</p>
-                            <% } %>
+                <div class="clock_hours">
+                    <p id="sunday" class="day"><%= work.week_day %> : <%= work.day %></p>
+                    <p id="clock_in" class="clock">Clock In: <%= work.punch_in %></p>
+                    <p id="break_in" class="break">Break Start: <%= work.break_in %></p>
+                    <p id="break_out" class="break">Break Ends: <%= work.break_out %></p>
+                    <p id="clock_out" class="clock">Clock Out: <%= work.punch_out %></p>
+
+                    <% if (work.punch_in && work.punch_out) { %>
+                        <% 
+                            const punchInTime = new Date(`2024-02-03 ${work.punch_in}`); 
+                            const punchOutTime = new Date(`2024-02-03 ${work.punch_out}`); 
+                            let formattedHours = 0
+
+                            // Check if punchOut is later than punchIn 
+                            if(punchOutTime> punchInTime) {
+                                const timeDiffInMilliseconds = punchOutTime - punchInTime;
+                                const hours = timeDiffInMilliseconds / (1000 * 60 * 60);
+                                formattedHours = hours.toFixed(2); // Format to two decimal places
+                            }
+                        %>
+                    
+                        <p id="total_hour" class="total">Total Work day: <%= formattedHours %> hours</p>
                         <% } else { %>
-                            <p id="total_hour" class="total">Total Work day: Punch In or Punch Out Missing</p>
+                            <p id="total_hour" class="total">Invalid Punch Times</p>
                         <% } %>
+                        <% } else { %>
+                            <p id="total_hour" class="total">Total Work day: Punch In or Punch Out Missing </p>
+                        <% } %>
+                    
                         <hr class="breack_line">
-                    </div>
-                    
-                    <% }); %>
-                    <%
-                    let totalWeekHours = 0; // Variable to store the total week hours
-                    
-                    workData.forEach(work => {
+                </div>
+
+            <% }); %>
+
+            <% let totalWeekHours = 0; // Variable to store the total week hours 
+                workData.forEach(work => {
+                    // Check if punch_in and punch_out exist
+                    if (work.punch_in && work.punch_out) {
                         // Calculate the total hours for the current day
                         const punchInTime = new Date(`2024-02-03 ${work.punch_in}`);
                         const punchOutTime = new Date(`2024-02-03 ${work.punch_out}`);
-                        const totalDayHours = (punchOutTime - punchInTime) / (1000 * 60 * 60); // Convert milliseconds to hours
-                    
+                        const totalDayHours = (punchOutTime - punchInTime) / (1000 * 60 * 60); // Convert milliseconds to hours;
+
                         // Update the total week hours
                         totalWeekHours += totalDayHours;
-                    });
-                    %>
-                    
-                    <!-- Display the total week hours -->
-                    <h4 class="total_week_hour">Total hour week: <%= totalWeekHours.toFixed(2) %> hours</h4>
-                    
+                    }
+                });
+            %>
+
+            <!-- Display the total week hours -->
+            <h4 class="total_week_hour">Total hour week: <%= totalWeekHours.toFixed(2) %> hours</h4>
+
         </div>
-
-
-
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
