@@ -49,67 +49,125 @@ app.use('/model', express.static('model'));
 //Define routes -> redirect to home page when open website
 app.get('/', async function (req, res) {
     const currentDay = new Date() 
+    const dayOfWeekArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     currentDay.setDate(currentDay.getDate() + 1)
     const formatCurrentDay = currentDay.toISOString().split('T')[0]
-    const dayOfWeekArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     const dayOfWeek = dayOfWeekArr[currentDay.getDay() -1]
 
     try {
+        let workData;
         switch (dayOfWeek) {
             
             case 'Sunday':
                 // Fetch data from MongoDB
-                var workData = await Work.find({ id_user: 100001, day: formatCurrentDay })
+                workData = await Work.find({ id_user: 100001, day: { $gte: formatCurrentDay} })
                 // Pass the fetched data to the template
-                res.render('pages/index', { workData })
+                //res.render('pages/index', { workData })
                 break;
             case 'Monday':
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 1);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
-                var workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay }})
-                res.render('pages/index', { workData })
+                workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay }})
+                //workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
+                //res.render('pages/index', { workData })
                 break;
             case 'Tuesday':
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 2);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
-                var workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
-                res.render('pages/index', { workData })
+                workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
+                //res.render('pages/index', { workData })
                 break;
             case 'Wednesday':
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 3);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
-                var workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
-                res.render('pages/index', { workData })
+                workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
+                //res.render('pages/index', { workData })
                 break;
             case 'Thursday':
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 4);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
-                var workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
-                res.render('pages/index', { workData })
+                workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
+                //res.render('pages/index', { workData })
                 break;
             case 'Friday':
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 5);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
-                var workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
-                res.render('pages/index', { workData })
+                workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
+                //res.render('pages/index', { workData })
                 break;
             case 'Saturday':
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 6);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
-                var workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
-                res.render('pages/index', { workData })
+                workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
+                //res.render('pages/index', { workData })
                 break;
         }
+        console.log('workData result:', {workData})
+        res.render('pages/index', { workData })
     } catch (error) {
         console.log("Error fetching data: ", error)
         res.status(500).send("Internal Server Error")
     }
+   /*const currentDate = new Date();
+    const dayOfWeekArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const currentDayIndex = currentDate.getDay();
+    const currentDay = dayOfWeekArr[currentDayIndex];
+    const formattedCurrentDay = currentDate.toISOString().split('T')[0];
+
+    try {
+        let workData;
+        switch (currentDay) {
+            case 'Sunday':
+                workData = await Work.find({ id_user: 100001, day: { $gte: formattedCurrentDay } });
+                break;
+            case 'Monday':
+                workData = await Work.find({ id_user: 100001, day: { $gte: formattedCurrentDay, $lte: currentDate } });
+                break;
+            case 'Tuesday':
+                var previousMonday = new Date(currentDate);
+                previousMonday.setDate(currentDate.getDate() - (currentDayIndex - 1));
+                var formattedPreviousMonday = previousMonday.toISOString().split('T')[0];
+                workData = await Work.find({ id_user: 100001, day: { $gte: formattedPreviousMonday, $lte: currentDate } });
+                break;
+            case 'Wednesday':
+                var previousMonday = new Date(currentDate);
+                previousMonday.setDate(currentDate.getDate() - (currentDayIndex - 1));
+                var formattedPreviousMonday = previousMonday.toISOString().split('T')[0];
+                workData = await Work.find({ id_user: 100001, day: { $gte: formattedPreviousMonday, $lte: currentDate } });
+                res.render('pages/index', { workData })
+                break;
+            case 'Thursday':
+                var previousMonday = new Date(currentDate);
+                previousMonday.setDate(currentDate.getDate() - (currentDayIndex - 1));
+                var formattedPreviousMonday = previousMonday.toISOString().split('T')[0];
+                workData = await Work.find({ id_user: 100001, day: { $gte: formattedPreviousMonday, $lte: currentDate } });
+                break;
+            case 'Friday':
+                var previousMonday = new Date(currentDate);
+                previousMonday.setDate(currentDate.getDate() - (currentDayIndex - 1));
+                var formattedPreviousMonday = previousMonday.toISOString().split('T')[0];
+                workData = await Work.find({ id_user: 100001, day: { $gte: formattedPreviousMonday, $lte: currentDate } });
+                break;
+            case 'Saturday':
+                var previousMonday = new Date(currentDate);
+                previousMonday.setDate(currentDate.getDate() - (currentDayIndex - 1));
+                var formattedPreviousMonday = previousMonday.toISOString().split('T')[0];
+                workData = await Work.find({ id_user: 100001, day: { $gte: formattedPreviousMonday, $lte: currentDate } });
+                break;
+        }
+
+        res.render('pages/index', { workData });
+    } catch (error) {
+        console.log("Error fetching data: ", error);
+        res.status(500).send("Internal Server Error");
+    }*/
+   
 })
 app.get('/punch', function (req, res) {
     res.render('pages/punch');
