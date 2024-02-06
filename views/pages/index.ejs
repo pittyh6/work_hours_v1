@@ -15,7 +15,7 @@
     <main class="container main">
         <h1>Clocking</h1>
         <div class="hours">
-            <% workData.forEach(work=> { %>
+            <% workData.forEach(work => { %>
                 <div class="clock_hours">
                     <p id="sunday" class="day"><%= work.week_day %> : <%= work.day %></p>
                     <p id="clock_in" class="clock">Clock In: <%= work.punch_in %></p>
@@ -38,14 +38,10 @@
                         %>
                     
                         <p id="total_hour" class="total">Total Work day: <%= formattedHours %> hours</p>
-                        <% } else { %>
-                            <p id="total_hour" class="total">Invalid Punch Times</p>
-                        <% } %>
-                        <% } else { %>
-                            <p id="total_hour" class="total">Total Work day: Punch In or Punch Out Missing </p>
-                        <% } %>
-                    
-                        <hr class="breack_line">
+                    <% } else { %>
+                        <p id="total_hour" class="total">Invalid Punch Times</p>
+                    <% } %>
+                    <hr class="breack_line">
                 </div>
 
             <% }); %>
