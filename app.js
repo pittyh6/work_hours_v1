@@ -50,12 +50,14 @@ app.use('/model', express.static('model'));
 app.get('/', async function (req, res) {
     const currentDay = new Date() 
     const dayOfWeekArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    currentDay.setDate(currentDay.getDate() + 1)
+    currentDay.setDate(currentDay.getDate())
     const formatCurrentDay = currentDay.toISOString().split('T')[0]
-    const dayOfWeek = dayOfWeekArr[currentDay.getDay() -1]
+    const dayOfWeek = dayOfWeekArr[currentDay.getDay()]
 
+    console.log("dayOfTheWeek: ", dayOfWeek)
+    console.log("currentDay: ", formatCurrentDay)
     try {
-        let workData;
+        let workData = [];
         switch (dayOfWeek) {
             
             case 'Sunday':
@@ -68,14 +70,17 @@ app.get('/', async function (req, res) {
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 1);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
-                workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay }})
-                //workData = await Work.find({ id_user: 100001, day: formatPreviousDay })
+                /*const mondayData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay }})
+                workData = workData.concat(mondayData)*/
+                workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
                 //res.render('pages/index', { workData })
                 break;
             case 'Tuesday':
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 2);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
+                /*const tuesdayData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay }})
+                workData = workData.concat(tuesdayData)*/
                 workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
                 //res.render('pages/index', { workData })
                 break;
@@ -83,6 +88,8 @@ app.get('/', async function (req, res) {
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 3);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
+                /*const wedData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay }})
+                workData = workData.concat(wedData)*/
                 workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
                 //res.render('pages/index', { workData })
                 break;
@@ -90,6 +97,8 @@ app.get('/', async function (req, res) {
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 4);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
+                /*const thursdayData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay }})
+                workData = workData.concat(thursdayData)*/
                 workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
                 //res.render('pages/index', { workData })
                 break;
@@ -97,6 +106,8 @@ app.get('/', async function (req, res) {
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 5);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
+                /*const fridayData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay }})
+                workData = workData.concat(fridayData)*/
                 workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
                 //res.render('pages/index', { workData })
                 break;
@@ -104,6 +115,8 @@ app.get('/', async function (req, res) {
                 var previousDay = new Date(currentDay);
                 previousDay.setDate(currentDay.getDate() - 6);
                 var formatPreviousDay = previousDay.toISOString().split('T')[0];
+                /*const saturdayData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay }})
+                workData = workData.concat(saturdayData)*/
                 workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
                 //res.render('pages/index', { workData })
                 break;
