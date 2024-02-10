@@ -12,6 +12,7 @@ body {
 .container {
   background-color: var(--blue-dark);
   margin: 0 auto;
+  /* height: 100vh; */
 }
 
 hr{
@@ -71,6 +72,12 @@ a:hover {
 }
 
 /* ------------- MAIN ------------- */
+.main-index{
+  height: 100%; 
+}
+.main-punch{
+  height: 100vh; 
+}
 .main {
   /* height: 100%; */
   margin: 0 auto;
