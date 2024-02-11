@@ -15,6 +15,7 @@
     <main class="container main main-index">
         <h1>Clocking</h1>
         <div class="hours">
+            
             <% workData.forEach(work => { %>
                 <div class="clock_hours">
                     <p id="sunday" class="day"><%= work.week_day %> : <%= work.day %></p>
@@ -43,9 +44,9 @@
                     <% } %>
                     <hr class="breack_line">
                 </div>
-
             <% }); %>
-
+        
+            
             <% let totalWeekHours = 0; // Variable to store the total week hours 
                 workData.forEach(work => {
                     // Check if punch_in and punch_out exist

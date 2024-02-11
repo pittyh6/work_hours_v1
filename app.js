@@ -62,7 +62,7 @@ app.get('/', async function (req, res) {
             
             case 'Sunday':
                 // Fetch data from MongoDB
-                workData = await Work.find({ id_user: 100001, day: { $gte: formatCurrentDay} })
+                workData = await Work.find({ id_user: 100001, day: formatCurrentDay} )
                 // Pass the fetched data to the template
                 //res.render('pages/index', { workData })
                 break;
@@ -120,6 +120,8 @@ app.get('/', async function (req, res) {
                 workData = await Work.find({ id_user: 100001, day: {$gte: formatPreviousDay, $lte: formatCurrentDay } })
                 //res.render('pages/index', { workData })
                 break;
+            default:
+                workData = [];
         }
         console.log('workData result:', {workData})
         res.render('pages/index', { workData })
