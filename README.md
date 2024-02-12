@@ -6,13 +6,14 @@
 ![Begin Banner](/Documentation/top-1200x350.gif)
 
 ## Project description
-- It is a Work Hours.
+- It is a Working Hours punch and history. Sum of the current week.
 
 What can you do with it?
 - Clock-in
+- Break-start
+- Break-end
 - Clock-out
 - History hours week
-- PaySlips
 
 ## What I learned/used (Link for details)
 - HTML
