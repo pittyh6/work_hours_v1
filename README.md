@@ -28,14 +28,16 @@ What can you do with it?
  ## Project Result 
 
 * Desktop Version:
-![Begin Banner](/Documentation/desktop.gif)
-
+![Begin Banner](/Documentation/desktopPunch.png)
+![Begin Banner](/Documentation/desktopHours.png)
+<!-- 
 * Tablet Version 
 ![Begin Banner](/Documentation/tablet.gif)
-
+-->
 
 * Mobile Verison 
-![Begin Banner](/Documentation/mobile.gif)
+![Begin Banner](/Documentation/mobilePunch.png)
+![Begin Banner](/Documentation/mobileHours.png)
 
 
 ## Previous Projects
