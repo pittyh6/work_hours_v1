@@ -73,7 +73,7 @@ a:hover {
 
 /* ------------- MAIN ------------- */
 .main-index{
-  height: 100%; 
+  height: 100vh; 
 }
 .main-punch{
   height: 100vh; 
