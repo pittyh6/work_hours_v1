@@ -36,7 +36,7 @@ What can you do with it?
 ![Begin Banner](/Documentation/tablet.gif)
 -->
 
-* Mobile Verison 
+* Mobile Verison <br>
 ![Begin Banner](/Documentation/mobilePunch.png)
 ![Begin Banner](/Documentation/mobileHours.png)
 
