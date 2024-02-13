@@ -50,9 +50,9 @@ app.use('/model', express.static('model'));
 app.get('/', async function (req, res) {
     const currentDay = new Date() 
     const dayOfWeekArr = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    currentDay.setDate(currentDay.getDate())
+    currentDay.setDate(currentDay.getDate() +1)
     const formatCurrentDay = currentDay.toISOString().split('T')[0]
-    const dayOfWeek = dayOfWeekArr[currentDay.getDay()]
+    const dayOfWeek = dayOfWeekArr[currentDay.getDay()-1]
 
     console.log("dayOfTheWeek: ", dayOfWeek)
     console.log("currentDay: ", formatCurrentDay)
