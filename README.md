@@ -28,7 +28,7 @@ What can you do with it?
 
  ## Project Result 
 
-* Desktop Version:
+* Desktop Version: <br>
 ![Begin Banner](/Documentation/desktopPunch.png)
 ![Begin Banner](/Documentation/desktopHours.png)
 <!-- 
